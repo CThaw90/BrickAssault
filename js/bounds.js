@@ -1,9 +1,21 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-var bound=document.getElementById("boundary");
-var B = document.body, H=document.document.documentElement, height;
+var browserHeight=Math.max(
+	document.documentElement.scrollHeight, 
+	document.documentElement.offsetHeight, 
+	document.body.offsetHeight, 
+	document.body.scrollHeight);
 
-if (typeof body.height !== 'undefined') {
-    height = document.height
-}
+var browserWidth=Math.max(
+	document.documentElement.scrollWidth, 
+	document.documentElement.offsetWidth, 
+	document.body.offsetWidth, 
+	document.body.scrollWidth);
+
+var boundary=document.getElementById("boundary");
+var ball=document.getElementById("ball");
+var strtPtX=(browserWidth / 2)-50;
+var strtPtY=browserHeight-50;
+
+ball.setAttribute("style", "position: relative; top: "+strtPtY+"px; left: "+strtPtX+"px;");
