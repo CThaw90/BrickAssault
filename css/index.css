@@ -7,3 +7,7 @@ body {
 .platform {
     display: inline-block;
 }
+
+#ball {
+    display: inline-block;
+}
