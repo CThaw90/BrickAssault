@@ -3,7 +3,7 @@
  */
 var up=true, right=true, left=false, down=false;
 var ball=document.getElementById("ball");
-var movement= 1, moving=false;
+var movement=1, moving=false;
 var ballBoundX, ballBoundY;
 
 
@@ -16,7 +16,7 @@ function startBallMovement(x, y) {
         moving=true;
         return window.setInterval(function() {
             ballMovement();
-        }, 10);
+        }, 1);
     }
 }
 function stopBallMovement(intervalObject) {

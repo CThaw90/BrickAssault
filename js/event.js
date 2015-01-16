@@ -3,7 +3,7 @@
  */
 var ENTER_KEY=13, SPACE_BAR=32;
 var ballHandle=null;
-var x=0, y=0;
+var x= 0, y=strtPtY;
 
 window.document.body.onkeypress=function(e) {
 	switch (e.keyCode) {
@@ -24,6 +24,8 @@ window.onresize=function() {
 };
 
 window.onmousemove=function(event) {
+	movePlatform
 	x=event.x;
-	y=event.y;
+
+	//y=event.y;
 };
