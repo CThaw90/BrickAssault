@@ -8,7 +8,7 @@ var x= 0, y=strtPtY;
 window.document.body.onkeypress=function(e) {
 	switch (e.keyCode) {
 		case ENTER_KEY:
-			ballHandle=startBallMovement(x, y);
+			activatePlatform();
 			break;
 		case SPACE_BAR:
 			ballHandle=startBallMovement(x, y);
@@ -24,8 +24,10 @@ window.onresize=function() {
 };
 
 window.onmousemove=function(event) {
-	movePlatform
-	x=event.x;
-
-	//y=event.y;
+	if (document.pointerLockElement) {
+		movePlatform(event.webkitMovementX);
+		x=event.webkitMovementX;
+		// console.log(event);
+		// x=event.x;
+	}
 };

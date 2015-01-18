@@ -6,6 +6,7 @@ var platform=document.getElementById("platform");
 var ball=document.getElementById("ball");
 var strtPtX, strtPtY;
 var browserHeight, browserWidth;
+var platformWidth=100;
 function calculateBounds() {
     browserHeight = Math.max(
         document.documentElement.scrollHeight,
@@ -19,11 +20,11 @@ function calculateBounds() {
         document.body.offsetWidth,
         document.body.scrollWidth);
 
-    var strtPlatformX = (browserWidth/2)-60;
-    var strtPlatformY = browserHeight-35;
+    var strtPlatformX = (browserWidth/2)-40;
+    var strtPlatformY = browserHeight-20;
     strtPtX = (browserWidth / 2);
     strtPtY = browserHeight-50;
 
-    platform.setAttribute("style", "position: relative; top: " + strtPlatformY + "px; left: " + strtPlatformX + "px;");
-    ball.setAttribute("style", "position: relative; top: " + strtPtY + "px; left: " + strtPtX + "px;");
+    platform.setAttribute("style", "position: absolute; top: " + strtPlatformY + "px; left: " + strtPlatformX + "px; width: "+platformWidth+"px;");
+    ball.setAttribute("style", "position: absolute; top: " + strtPtY + "px; left: " + strtPtX + "px;");
 }
