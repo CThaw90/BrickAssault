@@ -25,9 +25,7 @@ window.onresize=function() {
 
 window.onmousemove=function(event) {
 	if (document.pointerLockElement) {
-		movePlatform(event.webkitMovementX);
+		movePlatform(event.webkitMovementX, ballHandle);
 		x=event.webkitMovementX;
-		// console.log(event);
-		// x=event.x;
 	}
 };

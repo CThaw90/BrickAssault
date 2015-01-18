@@ -8,10 +8,6 @@ var ballBoundX, ballBoundY;
 
 
 function startBallMovement(x, y) {
-    var cssObject=objectifyCSS(ball.getAttribute("style"));
-    cssObject.left=x+"px";
-    cssObject.top=y+"px";
-    ball.setAttribute("style", stringifyToCSS(cssObject));
     if (!moving) {
         moving=true;
         return window.setInterval(function() {
@@ -57,6 +53,18 @@ function ballMovement() {
     }
 
     ball.setAttribute("style", stringifyToCSS(cssObject));
+}
+
+function moveBallLeft(x) {
+    var cssObject=objectifyCSS(ball.getAttribute("style"));
+    cssObject.left=String(parseInt(cssObject.left)-x)+"px";
+    ball.setAttribute("style", stringifyToCSS(cssObject));
+}
+
+function moveBallRight(x) {
+    var cssObject=objectifyCSS(ball.getAttribute("style"));
+    cssObject.left=String(parseInt(cssObject.left)+x)+"px";
+    ball.setAttribute("style", stringifyToCSS(cssObject))
 }
 
 calculateBounds();
