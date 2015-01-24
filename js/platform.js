@@ -1,6 +1,7 @@
 /**
  * Created by Chris on 1/14/2015.
  */
+var msg=document.getElementById("startMessage");
 var platform=document.getElementById("platform");
 var weirdOffset=60, active=false;
 
@@ -23,5 +24,6 @@ function movePlatform(x, ballHandle) {
 function activatePlatform() {
 	if (!document.pointerLockElement) {
 		boundary.requestPointerLock();
+		document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
 	}
 }

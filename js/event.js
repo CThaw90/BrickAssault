@@ -25,7 +25,10 @@ window.onresize=function() {
 
 window.onmousemove=function(event) {
 	if (document.pointerLockElement) {
+		document.getElementById("startMessage").style.visibility="hidden";
 		movePlatform(event.webkitMovementX, ballHandle);
 		x=event.webkitMovementX;
+	} else {
+		document.getElementById("startMessage").style.visibility= "visible";
 	}
 };
