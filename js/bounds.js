@@ -28,3 +28,21 @@ function calculateBounds() {
     platform.setAttribute("style", "position: absolute; top: " + strtPlatformY + "px; left: " + strtPlatformX + "px; width: "+platformWidth+"px;");
     ball.setAttribute("style", "position: absolute; top: " + strtPtY + "px; left: " + strtPtX + "px;");
 }
+function bounds() {
+
+    this.browserHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.offsetHeight,
+        document.body.scrollHeight);
+    
+    this.browserWidth = Math.max(
+        document.documentElement.scrollWidth,
+        document.documentElement.offsetWidth,
+        document.body.offsetWidth,
+        document.body.scrollWidth);
+    
+    this.generateObjectBounds = function(objectWidth, objectHeight) {
+        return {};
+    };
+}

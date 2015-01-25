@@ -27,3 +27,28 @@ function activatePlatform() {
 		document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
 	}
 }
+
+function platform() {
+    this.object=document.getElementById("platform");
+    this.active=false;
+    this.activatePlatform=function() {
+        if (!document.pointerLockElement) {
+            boundary.requestPointerLock();
+            document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
+        }
+    };
+    // Return a ball handle somewhere to see if it needs to 
+    // move with the platform or its moving already | ballHandle
+    this.move(x) {
+        var moved=false;
+        var cssObject=objectifyCSS(object.getAttribute("style"));
+        var location=parseInt(cssObject.left);
+        if (location+x > 0 && location+platformWidth+x < browserWidth) {
+            cssObject.left=String(parseInt(cssObject.left)+x)+"px";
+            object.setAttribute("style", stringifyToCSS(cssObject));
+            moved=true;
+        }
+        
+        return moved;
+    };
+}
