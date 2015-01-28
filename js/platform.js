@@ -39,16 +39,21 @@ function platform() {
     };
     // Return a ball handle somewhere to see if it needs to 
     // move with the platform or its moving already | ballHandle
-    this.move(x) {
+    this.move=function(x) {
         var moved=false;
-        var cssObject=objectifyCSS(object.getAttribute("style"));
+        var cssObject=objectifyCSS(this.object.getAttribute("style"));
         var location=parseInt(cssObject.left);
         if (location+x > 0 && location+platformWidth+x < browserWidth) {
             cssObject.left=String(parseInt(cssObject.left)+x)+"px";
-            object.setAttribute("style", stringifyToCSS(cssObject));
+            this.object.setAttribute("style", stringifyToCSS(cssObject));
             moved=true;
         }
         
         return moved;
     };
+	// Return the current location of the platform
+	this.location=function() {
+		var cssObject=this.object.getAttribute("style");
+		return {object: "platform", x: parseInt(cssObject.left), y: parseInt(cssObject.top)};
+	};
 }

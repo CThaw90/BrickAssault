@@ -29,7 +29,7 @@ function calculateBounds() {
     ball.setAttribute("style", "position: absolute; top: " + strtPtY + "px; left: " + strtPtX + "px;");
 }
 function bounds() {
-
+    this.object=document.getElementById("boundary");
     this.browserHeight = Math.max(
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight,
@@ -42,7 +42,7 @@ function bounds() {
         document.body.offsetWidth,
         document.body.scrollWidth);
     
-    this.generateObjectBounds = function(objectWidth, objectHeight) {
+    this.generateObjectPosition = function(objectWidth, objectHeight) {
         return {};
     };
 }

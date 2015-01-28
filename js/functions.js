@@ -32,3 +32,19 @@ function stringifyToCSS(object) {
 
     return cssText;
 }
+
+/* Checks objects to determine if   *
+ * all keys and values are the same */
+Object.defineProperty(Object.prototype, "equals", {
+    enumerable: false,
+    value: function(obj) {
+        if (typeof obj !== "object") return false;
+        for (var key in obj) {
+            if (this[key] !== obj[key]) 
+                return fal
+        }
+        
+        return true;
+    }
+});
+++
