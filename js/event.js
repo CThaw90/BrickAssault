@@ -34,16 +34,17 @@
 //};
 
 function event(bounds, platform, ball) {
-    this.ENTER_KEY=13, this.SPACE_BAR=32;
     this.launch=function() {
         
         window.document.body.onkeypress=function(e) {
+            var ENTER_KEY=13, SPACE_BAR=32;
             switch (e.keyCode) {
-                case this.ENTER_KEY:
-                    console.log("Enter Key Pressed");
+                case ENTER_KEY:
+                    // platform.activate();
+                    // document.getElementById("boundary").requestPointerLock();
                     break;
                     
-                case this.SPACE_BAR:
+                case SPACE_BAR:
                     console.log("Space Bar Key Pressed");
                     break;
                 
@@ -60,5 +61,17 @@ function event(bounds, platform, ball) {
             if (platform.active) {
             }
         };
+        
+        window.document.addEventListener('webkitpointerlockchange', function() {
+            console.log("Pointer Lock Change");
+        });
+        
+        window.document.addEventListener('mozpointerlockchange', function() {
+            console.log("Pointer Lock Change");
+        });
+        
+        window.document.addEventListener('pointerlockchange', function() {
+            console.log("Pointer Lock Change");
+        });
     };
 }
