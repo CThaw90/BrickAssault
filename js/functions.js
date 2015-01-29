@@ -47,4 +47,3 @@ Object.defineProperty(Object.prototype, "equals", {
         return true;
     }
 });
-++
