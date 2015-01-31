@@ -28,15 +28,20 @@
 //	}
 //}
 
-function platform(dimensions) {
+function platform() {
     this.object=document.getElementById("platform");
+    this.id=String("platform");
+    this.dimensions=null;
     this.active=false;
+
+    // Initializing the platform size and positioning
     this.activate=function() {
         if (!document.pointerLockElement) {
             boundary.requestPointerLock();
-            document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
+            // this.toggleStartMsg(false);
         }
     };
+
     // Return a ball handle somewhere to see if it needs to 
     // move with the platform or its moving already | ballHandle
     this.move=function(x) {
@@ -51,9 +56,15 @@ function platform(dimensions) {
         
         return moved;
     };
+
 	// Return the current location of the platform
 	this.location=function() {
 		var cssObject=this.object.getAttribute("style");
 		return {object: "platform", x: parseInt(cssObject.left), y: parseInt(cssObject.top)};
 	};
+
+    this.setDimensions=function(dimensions) {
+        this.dimensions=dimensions;
+        this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+    };
 }

@@ -4,12 +4,14 @@ body {
     margin: 0;
 }
 
-#platform {
-    display: inline-block;
+.game-object {
+	display: inline-block;
+	overflow: hidden;
 }
 
-#ball {
-    display: inline-block;
+.sprite-img {
+	height: 100%;
+	width: 100%;
 }
 
 #startMessage {

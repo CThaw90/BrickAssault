@@ -1,12 +1,10 @@
 /*
     This is the logical engine of the entire game.
 */
-console.log("Game Starting...");
+// var ball=new ball();
 var bounds = new bounds();
 var platform=new platform();
-// bounds.calculateBounds();
-//var platform=new platform();
-//var ball=new ball();
+var event = new event(bounds, platform);
+platform.setDimensions(bounds.sizeAndPosition(platform, true));
 
-//var events=new event(bounds, platform, ball);
-//events.launch();
+event.launch();

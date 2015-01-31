@@ -2,7 +2,7 @@
  * Created by Chris on 1/15/2015.
  */
  
-/* Turns CSS String into an Object */
+/* Turns DOM CSS String into a Javascript Object */
 function objectifyCSS(cssText) {
     if (typeof cssText !== String("string")) {
         return cssText;
@@ -20,7 +20,7 @@ function objectifyCSS(cssText) {
     return object;
 }
 
-/* Turn Object into a CSS String */
+/* Turns Javascript Object into a CSS String */
 function stringifyToCSS(object) {
     if (typeof object !== String("object")) {
         return object;
@@ -46,4 +46,13 @@ Object.defineProperty(Object.prototype, "equals", {
         
         return true;
     }
+});
+
+/* Toggles the visibility of the initial start message */
+Object.defineProperty(Object.prototype, "toogleStartMsg", {
+	enumerable: false,
+	value: function(toggle) {
+		var msg = document.getElementById("startMessage");
+		msg.style.visiblity = toggle ? "visible" : "hidden";
+	}
 });
