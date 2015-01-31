@@ -29,7 +29,9 @@
 //    ball.setAttribute("style", "position: absolute; top: " + strtPtY + "px; left: " + strtPtX + "px;");
 //}
 function bounds() {
+    this.objectDimen={platform: {height: .04, width: .10}, ball: {height: .04, width: .04}};
     this.object=document.getElementById("boundary");
+    
     this.browserHeight = Math.max(
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight,
@@ -42,10 +44,15 @@ function bounds() {
         document.body.offsetWidth,
         document.body.scrollWidth);
     
-    this.generateObjectPosition = function(objectWidth, objectHeight) {
-        return {};
+    this.sizeAndPosition = function(object) {
+        var h=this.browserHeight * this.objectDimen[object].height;
+        var w=this.browserWidth * this.objectDimen[object].width;
+        var l=(this.browserWidth-w) / 2;
+        var t=this.browserHeight - h;
+        return {top: t, left: l, height: h, width: w};
     };
     
     this.calculateBounds=function() {
+        console.log("Calculating bounds");
     };
 }

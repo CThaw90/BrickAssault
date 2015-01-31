@@ -6,11 +6,10 @@
 //var movement=1, moving=false;
 //var ballBoundX, ballBoundY;
 
-function ball(x, y) {
+function ball(dimensions) {
     this.up=true, this.right=true, this.left=false, this.down=false;
     this.object=document.getElementById("ball");
     this.movement=1, this.moving=false;
-    this.xbounds=x, this.ybounds=y;
     this.handle=null;
     
     this.location=function() {

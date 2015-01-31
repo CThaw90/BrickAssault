@@ -28,10 +28,10 @@
 //	}
 //}
 
-function platform() {
+function platform(dimensions) {
     this.object=document.getElementById("platform");
     this.active=false;
-    this.activatePlatform=function() {
+    this.activate=function() {
         if (!document.pointerLockElement) {
             boundary.requestPointerLock();
             document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
