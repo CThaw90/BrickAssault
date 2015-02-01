@@ -4,11 +4,12 @@
 function event(bounds, platform, ball) {
     this.launch=function() {
         
+        window.document.body.onkeydown=
         window.document.body.onkeypress=function(e) {
-            var ENTER_KEY=13, SPACE_BAR=32;
+            var ENTER_KEY=13, SPACE_BAR=32, ESC_KEY=27;
             switch (e.keyCode) {
                 case ENTER_KEY:
-                    // platform.activate();
+                	bounds.object.requestPointerLock();
                     // document.getElementById("boundary").requestPointerLock();
                     break;
                     
@@ -16,7 +17,12 @@ function event(bounds, platform, ball) {
                     console.log("Space Bar Key Pressed");
                     break;
                 
+                case ESC_KEY:
+                	console.log("Escape Key Pressed");
+                	break;
+
                 default:
+                	// console.log(e);
                     break;
             }
         };
@@ -25,25 +31,34 @@ function event(bounds, platform, ball) {
         	bounds.calculateBounds();
 
             platform.setDimensions(bounds.sizeAndPosition(platform, !platform.active));
-            // console.log("Window Resizing!");
-            // ball.dimensions=bounds.sizeAndPosition("ball");
         };
         
-        window.onmouosemove=function(e) {
+        window.onmousemove=function(e) {
+        	// console.log("Mouse Moving!");
             if (platform.active) {
+            	platform.move(e.webkitMovementX);
             }
         };
         
         window.document.addEventListener('webkitpointerlockchange', function() {
-            console.log("Pointer Lock Change");
+            // console.log("Pointer Lock Change");
+            // console.log(document.pointerLockElement);
+            platform.active = document.pointerLockElement!==null &&
+            				  document.pointerLockElement!==undefined;
         });
         
         window.document.addEventListener('mozpointerlockchange', function() {
-            console.log("Pointer Lock Change");
+            // console.log(document.pointerLockElement);
+            platform.active = document.pointerLockElement!==null &&
+            				  document.pointerLockElement!==undefined;
         });
         
         window.document.addEventListener('pointerlockchange', function() {
-            console.log("Pointer Lock Change");
+            // console.log("Pointer Lock Change");
+            // console.log(document.pointerLockElement);
+            platform.active = document.pointerLockElement!==null  &&
+            			   	  document.pointerLockElement!==undefined;
+            // console.log(platform.active ? "Platform Active" : "Platform Inactive");
         });
     };
 }

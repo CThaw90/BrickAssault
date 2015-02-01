@@ -35,12 +35,13 @@ function platform() {
     this.active=false;
 
     // Initializing the platform size and positioning
-    this.activate=function() {
-        if (!document.pointerLockElement) {
-            boundary.requestPointerLock();
-            // this.toggleStartMsg(false);
-        }
-    };
+    // this.activate=function() {
+    //     this.active=true;
+    //     if (!document.pointerLockElement) {
+    //          boundary.requestPointerLock();
+    //          this.toggleStartMsg(false);
+    //     }
+    // };
 
     // Return a ball handle somewhere to see if it needs to 
     // move with the platform or its moving already | ballHandle
@@ -48,11 +49,23 @@ function platform() {
         var moved=false;
         var cssObject=objectifyCSS(this.object.getAttribute("style"));
         var location=parseInt(cssObject.left);
-        if (location+x > 0 && location+platformWidth+x < browserWidth) {
+        if (location+x > 0 && location+x+parseInt(this.dimensions.width) < window.innerWidth) {
             cssObject.left=String(parseInt(cssObject.left)+x)+"px";
             this.object.setAttribute("style", stringifyToCSS(cssObject));
             moved=true;
+        } else if (location+x < 0 && location!==0) {
+            cssObject.left="0px";
+            this.object.setAttribute("style", stringifyToCSS(cssObject));
+            moved=true;
+        } else if (location+x+parseInt(this.dimensions.width) > window.innerWidth 
+                    && location+this.dimensions.width!==window.innerWidth) {
+            cssObject.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
+            this.object.setAttribute("style", stringifyToCSS(cssObject));
+            moved=true;
         }
+        // if (location+x > 0 && location+this.dimensions.width+x < this.dimensions.width) {
+
+        // }
         
         return moved;
     };
