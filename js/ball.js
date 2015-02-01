@@ -11,6 +11,7 @@ function ball(dimensions) {
     this.object=document.getElementById("ball");
     this.movement=1, this.moving=false;
     this.dimensions=dimensions;
+    this.id=String("ball");
     this.handle=null;
     
     this.location=function() {
@@ -72,16 +73,24 @@ function ball(dimensions) {
         
         this.object.setAttribute("style", (moved) ? stringifyToCSS(cssObject) : this.object.getAttribute("style"));
     };
-    
-    this.moveLeft=function(x) {
-        var cssObject=objectifyCSS(ball.getAttribute("style"));
-        cssObject.left=String(parseInt(cssObject.left)-Math.abs(x)+"px");
-        ball.setAttribute("style", stringifyToCSS(cssObject));
+
+    this.setDimensions=function(dimensions) {
+        this.dimensions=dimensions;
+        this.object.setAttribute("style", stringifyToCSS(this.dimensions));
     };
+    // this.move=function(x) {
+    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
+    // };
     
-    this.moveRight=function(x) {
-        var cssObject=objectifyCSS(ball.getAttribute("style"));
-        cssObject.left=String(parseInt(cssObject.left)+Math.abs(x))+"px";
-        ball.setAttribute("style", stringifyToCSS(cssObject));
-    };
+    // this.moveLeft=function(x) {
+    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
+    //     cssObject.left=String(parseInt(cssObject.left)-Math.abs(x)+"px");
+    //     ball.setAttribute("style", stringifyToCSS(cssObject));
+    // };
+    
+    // this.moveRight=function(x) {
+    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
+    //     cssObject.left=String(parseInt(cssObject.left)+Math.abs(x))+"px";
+    //     ball.setAttribute("style", stringifyToCSS(cssObject));
+    // };
 }

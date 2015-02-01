@@ -1,47 +1,12 @@
 /**
  * Created by Chris on 1/14/2015.
  */
-//var msg=document.getElementById("startMessage");
-//var platform=document.getElementById("platform");
-//var weirdOffset=60, active=false;
-//
-//function movePlatform(x, ballHandle) {
-//	var platformMoved=false;
-//	var cssObject=objectifyCSS(platform.getAttribute("style"));
-//	var location=parseInt(cssObject.left);
-//	if (location+x > 0 && location+platformWidth+x < browserWidth) {
-//		cssObject.left=String(parseInt(cssObject.left)+x)+"px";
-//		platform.setAttribute("style", stringifyToCSS(cssObject));
-//		platformMoved=true;
-//	}
-//
-//	if (ballHandle===null && platformMoved) {
-//		if (x > 0) moveBallRight(x);
-//		if (x < 0) moveBallLeft(Math.abs(x));
-//	}
-//}
-//
-//function activatePlatform() {
-//	if (!document.pointerLockElement) {
-//		boundary.requestPointerLock();
-//		document.getElementById("startMessage").style.visibility=document.pointerLockElement ? "hidden" : "visible";
-//	}
-//}
 
 function platform() {
     this.object=document.getElementById("platform");
     this.id=String("platform");
     this.dimensions=null;
     this.active=false;
-
-    // Initializing the platform size and positioning
-    // this.activate=function() {
-    //     this.active=true;
-    //     if (!document.pointerLockElement) {
-    //          boundary.requestPointerLock();
-    //          this.toggleStartMsg(false);
-    //     }
-    // };
 
     // Return a ball handle somewhere to see if it needs to 
     // move with the platform or its moving already | ballHandle
@@ -63,9 +28,6 @@ function platform() {
             this.object.setAttribute("style", stringifyToCSS(cssObject));
             moved=true;
         }
-        // if (location+x > 0 && location+this.dimensions.width+x < this.dimensions.width) {
-
-        // }
         
         return moved;
     };
