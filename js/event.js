@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-function event(bounds, platform, ball) {
+function event(bounds, platform, ball, collision) {
     this.launch=function() {
         
         window.document.body.onkeydown=
@@ -10,11 +10,10 @@ function event(bounds, platform, ball) {
             switch (e.keyCode) {
                 case ENTER_KEY:
                 	bounds.object.requestPointerLock();
-                    // document.getElementById("boundary").requestPointerLock();
                     break;
                     
                 case SPACE_BAR:
-                    console.log("Space Bar Key Pressed");
+                    ball.start(collision);
                     break;
                 
                 case ESC_KEY:

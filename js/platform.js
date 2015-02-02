@@ -12,20 +12,27 @@ function platform() {
     // move with the platform or its active already | ballHandle
     this.move=function(x) {
         var moved=0;
-        var cssObject=objectifyCSS(this.object.getAttribute("style"));
-        var location=parseInt(cssObject.left);
+//        var cssObject=objectifyCSS(this.object.getAttribute("style"));
+//        var location=parseInt(cssObject.left);
+        var location=parseInt(this.dimensions.left);
         if (location+x > 0 && location+x+parseInt(this.dimensions.width) < window.innerWidth) {
-            cssObject.left=String(parseInt(cssObject.left)+x)+"px";
-            this.object.setAttribute("style", stringifyToCSS(cssObject));
+            // cssObject.left=String(parseInt(cssObject.left)+x)+"px";
+            // this.object.setAttribute("style", stringifyToCSS(cssObject));
+            this.dimensions.left=String(parseInt(this.dimensions.left)+x)+"px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
             moved=x;
         } else if (location+x < 0 && location!==0) {
-            cssObject.left="0px";
-            this.object.setAttribute("style", stringifyToCSS(cssObject));
+            // cssObject.left="0px";
+            // this.object.setAttribute("style", stringifyToCSS(cssObject));
+            this.dimensions.left="0px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
             moved=0-location;
         } else if (location+x+parseInt(this.dimensions.width) > window.innerWidth 
                     && location+this.dimensions.width!==window.innerWidth) {
-            cssObject.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
-            this.object.setAttribute("style", stringifyToCSS(cssObject));
+            // cssObject.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
+            // this.object.setAttribute("style", stringifyToCSS(cssObject));
+            this.dimensions.left=String(window.innerWidth-parseInt(this.dimensions.width))+"px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
             moved=window.innerWidth-(location+parseInt(this.dimensions.width));
         }
         
@@ -42,6 +49,4 @@ function platform() {
         this.dimensions=dimensions;
         this.object.setAttribute("style", stringifyToCSS(this.dimensions));
     };
-
-    console.log(bounds.browserHeight);
 }

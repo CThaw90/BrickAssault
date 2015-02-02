@@ -7,10 +7,10 @@ function ball(dimensions) {
     this.movement=1, this.active=false;
     this.dimensions=dimensions;
     this.id=String("ball");
+    this.detector=null;
     this.handle=null;
     
     this.initPosition=function(platform) {
-        console.log(this.dimensions);
         this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
         this.object.setAttribute("style", stringifyToCSS(this.dimensions));
     };
@@ -20,12 +20,10 @@ function ball(dimensions) {
         return {object: "ball", x: parseInt(cssObject.left), y: parseInt(cssObject.top)};
     };
     
-    this.start=function() {
+    this.start=function(detector) {
         if (!this.active) {
             this.active=true;
-            this.handle=window.setInterval(function() {
-                this.continuousMovement();
-            }, 1);
+            this.handle=window.setInterval(this.continuousMovement, 1000, detector);
         }
     };
     
@@ -35,9 +33,12 @@ function ball(dimensions) {
             this.active = false;
         }
     };
-    
-    this.continuousMovement=function() {
-        var cssObject=objectifyCSS(ball.getAttribute("style"));
+    this.continuousMovement=function(detector) {
+        console.log("Starting continuous movement with detector object");
+        console.log(detector["objects"].platform);
+    };
+    this.trajectory=function(detector) {
+        var cssObject=objectifyCSS(this.object.getAttribute("style"));
         cssObject.left=parseInt(cssObject.left);
         cssObject.top=parseInt(cssObject.top);
         var moved=false;
