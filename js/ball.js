@@ -1,18 +1,19 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-//var up=true, right=true, left=false, down=false;
-//var ball=document.getElementById("ball");
-//var movement=1, moving=false;
-//var ballBoundX, ballBoundY;
-
 function ball(dimensions) {
     this.up=true, this.right=true, this.left=false, this.down=false;
     this.object=document.getElementById("ball");
-    this.movement=1, this.moving=false;
+    this.movement=1, this.active=false;
     this.dimensions=dimensions;
     this.id=String("ball");
     this.handle=null;
+    
+    this.initPosition=function(platform) {
+        console.log(this.dimensions);
+        this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
+        this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+    };
     
     this.location=function() {
         var cssObject=this.object.getAttribute("style");
@@ -20,8 +21,8 @@ function ball(dimensions) {
     };
     
     this.start=function() {
-        if (!this.moving) {
-            this.moving=true;
+        if (!this.active) {
+            this.active=true;
             this.handle=window.setInterval(function() {
                 this.continuousMovement();
             }, 1);
@@ -29,9 +30,9 @@ function ball(dimensions) {
     };
     
     this.stop=function() {
-        if (this.moving && this.handle) {
+        if (this.active && this.handle) {
             window.clearInterval(this.handle);
-            this.moving=false;
+            this.active = false;
         }
     };
     
@@ -78,19 +79,24 @@ function ball(dimensions) {
         this.dimensions=dimensions;
         this.object.setAttribute("style", stringifyToCSS(this.dimensions));
     };
-    // this.move=function(x) {
-    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
-    // };
-    
-    // this.moveLeft=function(x) {
-    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
-    //     cssObject.left=String(parseInt(cssObject.left)-Math.abs(x)+"px");
-    //     ball.setAttribute("style", stringifyToCSS(cssObject));
-    // };
-    
-    // this.moveRight=function(x) {
-    //     var cssObject=objectifyCSS(ball.getAttribute("style"));
-    //     cssObject.left=String(parseInt(cssObject.left)+Math.abs(x))+"px";
-    //     ball.setAttribute("style", stringifyToCSS(cssObject));
-    // };
+    this.move=function(x) {
+        var moved=false;
+        var location=parseInt(this.dimensions.left);
+        if (location+x > 0 && location+x+parseInt(this.dimensions.width) < window.innerWidth) {
+            this.dimensions.left=String(parseInt(this.dimensions.left)+x)+"px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            moved=true;
+        } else if (location+x < 0 && location!==0) {
+            this.dimensions.left="0px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            moved=true;
+        } else if (location+x+parseInt(this.dimensions.width) > window.innerWidth
+                   && location+this.dimensions.width!==window.innerWidth) {
+            this.dimensions.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
+            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            moved=true;
+        }
+        
+        return moved;
+    };
 }

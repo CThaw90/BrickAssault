@@ -35,8 +35,11 @@ function event(bounds, platform, ball) {
         
         window.onmousemove=function(e) {
         	// console.log("Mouse Moving!");
-            if (platform.active) {
+            if (platform.active && ball.active) {
             	platform.move(e.webkitMovementX);
+            } else if (platform.active && !ball.active) {
+//                platform.move(e.webkitMovementX);
+                ball.move(platform.move(e.webkitMovementX));
             }
         };
         

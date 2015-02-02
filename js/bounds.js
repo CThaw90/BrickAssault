@@ -20,6 +20,10 @@ function bounds() {
     this.browserHeight=null, this.browserWidth=null;
     this.object=document.getElementById("boundary");
 
+    // Pixel offset is contingent on the current
+    // active window size of the browser
+    this.pixelOffset=.99;
+
     this.sizeAndPosition = function(object, idle) {
         var h=this.browserHeight * this.objectDimen[object.id].height;
         var w=this.browserWidth * this.objectDimen[object.id].width;
@@ -32,8 +36,8 @@ function bounds() {
     };
     
     this.calculateBounds=function() {
-        this.browserHeight=window.innerHeight;
-        this.browserWidth=window.innerWidth;
+        this.browserHeight=window.innerHeight * this.pixelOffset;
+        this.browserWidth=window.innerWidth * this.pixelOffset;
     };
 
     this.calculateBounds();
