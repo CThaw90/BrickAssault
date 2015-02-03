@@ -1,6 +1,11 @@
-body, body#boundary {
+div#boundary {
+    background-color: #000000;
+    border: 1px solid #0000FF;
+/*
     height: 100%;
     width: 100%;
+*/
+    z-index:-1;
     margin: 0;
 }
 

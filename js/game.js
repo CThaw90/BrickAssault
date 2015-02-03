@@ -8,6 +8,7 @@ var collision = new collision();
 var event = new event(bounds, platform, ball, collision);
 collision.registerObject(platform);
 collision.registerObject(ball);
+collision.registerObject(bounds);
 platform.setDimensions(bounds.sizeAndPosition(platform, true));
 ball.setDimensions(bounds.sizeAndPosition(ball, true));
 
