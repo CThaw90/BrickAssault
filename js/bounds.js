@@ -22,7 +22,7 @@ function bounds() {
     this.object=document.getElementById("boundary");
     this.dimensions={position: "absolute"};
     this.length=null;
-    this.offset=5;
+    this.offset=2;
     // Alignment orientation variable
     // False: aligned vertically.
     this.align=null;
@@ -44,15 +44,13 @@ function bounds() {
     
     this.calculateBounds=function() {
         this.align=window.innerHeight > window.innerWidth;
-        console.log("Align " + (this.align ? " Vertical" : "Horizontal") );
-        this.length=Math.min(window.innerHeight, window.innerWidth)-this.offset;
-        this.wall.bottom=this.length===window.innerHeight-this.offset ? (window.innerHeight-this.offset) : (window.innerHeight / 4);
-        this.wall.top=this.length===window.innerHeight-this.offset ? (0) : ( (window.innerHeight*3) / 4);
-        this.wall.right=this.length===window.innerWidth-this.offset ? (0) : ( (window.innerWidth * 3) / 4);
-        this.wall.left=this.length===window.innerWidth-this.offset ? (window.innerWidth-this.offset) : (window.innerWidth / 4);
+        this.length=Math.min(window.innerHeight, window.innerWidth)-(this.offset*3);
         
-        this.browserHeight=window.innerHeight * this.pixelOffset;
-        this.browserWidth=window.innerWidth * this.pixelOffset;
+        this.wall.left=this.align ? 0+this.offset : (window.innerWidth/2)-(this.length/2);
+        this.wall.right=this.wall.left+this.length;
+        
+        this.wall.top=this.align ? (window.innerHeight/2)-(this.length/2) : 0 + this.offset;
+        this.wall.bottom=this.wall.top+this.length;
         
         this.dimensions.height=this.length+"px";
         this.dimensions.width=this.length+"px";
