@@ -16,26 +16,24 @@
     document.body.scrollWidth
  */
 function bounds() {
-    this.objectDimen={platform: {height: .04, width: .10}, ball: {height: .04, width: .04}};
+    this.objectDimen={platform: {height: .02, width: .10}, ball: {height: .03, width: .03}};
     this.wall={left: null, top: null, right: null, bottom: null};
     this.browserHeight=null, this.browserWidth=null;
     this.object=document.getElementById("boundary");
     this.dimensions={position: "absolute"};
+    this.id="bounds";
     this.length=null;
     this.offset=2;
     // Alignment orientation variable
     // False: aligned vertically.
+    // True: aligned horizontally
     this.align=null;
-    
-    // Pixel offset is contingent on the current
-    // active window size of the browser
-    this.pixelOffset=.99;
 
     this.sizeAndPosition = function(object, idle) {
-        var h=this.browserHeight * this.objectDimen[object.id].height;
-        var w=this.browserWidth * this.objectDimen[object.id].width;
-        var l= idle ? (this.browserWidth-w) / 2 : object.dimensions.left;
-        var t= idle ? this.browserHeight - h : object.dimensions.top;
+        var h=this.length * this.objectDimen[object.id].height;
+        var w=this.length * this.objectDimen[object.id].width;
+        var l= (idle ? (this.length-w) / 2 : parseInt(object.dimensions.left))+this.wall.left;
+        var t= idle ? this.length-h : parseInt(object.dimensions.top);
         return {
             position: "absolute", top: t+"px", 
             left: l+"px", height: h+"px", width: w+"px"

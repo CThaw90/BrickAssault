@@ -12,28 +12,20 @@ function platform() {
     // move with the platform or its active already | ballHandle
     this.move=function(x) {
         var moved=0;
-//        var cssObject=objectifyCSS(this.object.getAttribute("style"));
-//        var location=parseInt(cssObject.left);
         var location=parseInt(this.dimensions.left);
-        if (location+x > 0 && location+x+parseInt(this.dimensions.width) < window.innerWidth) {
-            // cssObject.left=String(parseInt(cssObject.left)+x)+"px";
-            // this.object.setAttribute("style", stringifyToCSS(cssObject));
+        if (location+x > bounds.wall.left && location+x+parseInt(this.dimensions.width) < bounds.wall.right) {
             this.dimensions.left=String(parseInt(this.dimensions.left)+x)+"px";
             this.object.setAttribute("style", stringifyToCSS(this.dimensions));
             moved=x;
-        } else if (location+x < 0 && location!==0) {
-            // cssObject.left="0px";
-            // this.object.setAttribute("style", stringifyToCSS(cssObject));
-            this.dimensions.left="0px";
+        } else if (location+x < bounds.wall.left && location!==bounds.wall.left) {
+            this.dimensions.left=bounds.wall.left+"px";
             this.object.setAttribute("style", stringifyToCSS(this.dimensions));
-            moved=0-location;
-        } else if (location+x+parseInt(this.dimensions.width) > window.innerWidth 
+            moved=bounds.wall.left-location;
+        } else if (location+x+parseInt(this.dimensions.width) > bounds.wall.right 
                     && location+this.dimensions.width!==window.innerWidth) {
-            // cssObject.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
-            // this.object.setAttribute("style", stringifyToCSS(cssObject));
-            this.dimensions.left=String(window.innerWidth-parseInt(this.dimensions.width))+"px";
+            this.dimensions.left=String(bounds.wall.right-parseInt(this.dimensions.width))+"px";
             this.object.setAttribute("style", stringifyToCSS(this.dimensions));
-            moved=window.innerWidth-(location+parseInt(this.dimensions.width));
+            moved=bounds.wall.right-(location+parseInt(this.dimensions.width));
         }
         
         return moved;

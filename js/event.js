@@ -30,6 +30,8 @@ function event(bounds, platform, ball, collision) {
         	bounds.calculateBounds();
 
             platform.setDimensions(bounds.sizeAndPosition(platform, !platform.active));
+            ball.setDimensions(bounds.sizeAndPosition(ball, !ball.active));
+            if (!ball.active) ball.initPosition(platform);
         };
         
         window.onmousemove=function(e) {
