@@ -38,6 +38,7 @@ function traject(ball, detector) {
     ball.dimensions.top=parseInt(ball.dimensions.top)+(ball.up ? -1 : 1);
     ball.dimensions.height=parseInt(ball.dimensions.height);
     ball.dimensions.width=parseInt(ball.dimensions.width);
+    ball.dimensions.id=ball.id;
     var moved=detector.detect(ball.dimensions);
     if (moved) {
         console.log("Detected a collision @:");
@@ -56,8 +57,11 @@ function traject(ball, detector) {
                 ball.right=true;
                 break;
             case "BWall":
-                ball.down=false;
-                ball.up=true;
+                ball.stop();
+                break;
+            case "Platform":
+                ball.down=!ball.down;
+                ball.up=!ball.up;
                 break;
             default:
                 ball.stop();

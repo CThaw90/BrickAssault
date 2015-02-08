@@ -13,7 +13,11 @@ function event(bounds, platform, ball, collision) {
                     break;
                     
                 case SPACE_BAR:
-                    ball.start(collision);
+                    if (ball.active && e.type==="keydown") {
+                        ball.stop();
+                    } else if (e.type==="keydown") {
+                        ball.start(collision);
+                    }
                     break;
                 
                 case ESC_KEY:

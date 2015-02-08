@@ -9,7 +9,8 @@ function collision() {
     this.detect=function(pos) {
         var result=false;
         for (var key in this.objects) {
-            if (key==="bounds") {
+            if (key===pos.id) {}
+            else if (key==="bounds") {
                 var wall = this.objects[key].wall;
                 if (wall.left===parseInt(pos.left) || wall.left > parseInt(pos.left)) {
                     result = {details: String("Collided with left wall at x="+wall.left+" y="+parseInt(pos.top)),
@@ -32,8 +33,17 @@ function collision() {
                              };
                 }
             }
-            else {
-                result={object: "platform"};
+//            else if (parseInt(this.objects[key].dimensions.left) <= parseInt(pos.left)+parseInt(pos.width) && 
+//                     (parseInt(this.objects[) {
+//            }
+            else if (parseInt(this.objects[key].dimensions.top) <= parseInt(pos.top)+parseInt(pos.height) &&
+                     parseInt(this.objects[key].dimensions.left) <= parseInt(pos.left)+parseInt(pos.width) &&
+                     parseInt(this.objects[key].dimensions.left)+parseInt(this.objects[key].dimensions.width) >= parseInt(pos.left)) {
+//                result = {platform: this.objects[key].dimensions, ball: pos};
+                result = {details: String("Collided with "+this.objects[key].id+" at x="+parseInt(pos.left)+
+                                          " y="+parseInt(this.objects[key].dimensions.top)), 
+                          object: "Platform", x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top)
+                         };
             }
         }
         return result;
