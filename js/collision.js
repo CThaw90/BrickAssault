@@ -6,17 +6,36 @@ function collision() {
         this.objects[object.id]=object;
     };
 
-    this.detect=function(pos, object) {
+    this.detect=function(pos) {
         var result=false;
-        if (object==="bounds") {
-            console.log("Left Wall Coordinate "+this.objects[object].wall.left);
-            console.log("Platform Position Left Coordinate"+pos);
-            result = this.objects[object].wall.left <= pos && !result ? result : "bounds_left";
-            resilt = this.objects[object].wall.right >= pos && !result ? result : "bounds_right";
-//            result = this.objects[object].wall.top <= pos && !result ? result : "bounds_top";
-//            result = this.objects[object].wall.bottom >= pos && !result ? result : "bounds_bottom";
+        for (var key in this.objects) {
+            if (key==="bounds") {
+                var wall = this.objects[key].wall;
+                if (wall.left===parseInt(pos.left) || wall.left > parseInt(pos.left)) {
+                    result = {details: String("Collided with left wall at x="+wall.left+" y="+parseInt(pos.top)),
+                              object: "LWall", x: wall.left, y: parseInt(pos.top)
+                             };
+                }
+                else if (wall.right===parseInt(pos.left)+parseInt(pos.width) || wall.right < parseInt(pos.left)+parseInt(pos.width)) {
+                    result = {details: String("Collided with right wall at x="+wall.right+" y="+parseInt(pos.top)),
+                              object: "RWall", x: wall.right, y: parseInt(pos.top)
+                             };
+                }
+                else if (wall.top===parseInt(pos.top) || wall.top > parseInt(pos.top)) {
+                    result = {details: String("Collided with top wall at x="+pos.left+" y="+parseInt(wall.top)),
+                              object: "TWall", x: parseInt(pos.left), y: wall.top
+                             };
+                }
+                else if (wall.bottom===parseInt(pos.top)+pos.height || wall.bottom < parseInt(pos.top)+parseInt(pos.height)) {
+                    result = {details: String("Collided with bottom wall at x="+pos.left+" y="+parseInt(wall.bottom)),
+                              object: "BWall", x: parseInt(pos.left), y: wall.bottom
+                             };
+                }
+            }
+            else {
+                result={object: "platform"};
+            }
         }
-        
         return result;
     };
 }

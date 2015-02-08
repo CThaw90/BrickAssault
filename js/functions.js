@@ -33,6 +33,42 @@ function stringifyToCSS(object) {
     return cssText;
 }
 
+function traject(ball, detector) {
+    ball.dimensions.left=parseInt(ball.dimensions.left)+(ball.left ? -1 : 1);
+    ball.dimensions.top=parseInt(ball.dimensions.top)+(ball.up ? -1 : 1);
+    ball.dimensions.height=parseInt(ball.dimensions.height);
+    ball.dimensions.width=parseInt(ball.dimensions.width);
+    var moved=detector.detect(ball.dimensions);
+    if (moved) {
+        console.log("Detected a collision @:");
+        console.log(moved);
+        switch (moved.object) {
+            case "RWall":
+                ball.left=true;
+                ball.right=false;
+                break;
+            case "TWall":
+                ball.down=true;
+                ball.up=false;
+                break;
+            case "LWall":
+                ball.left=false;
+                ball.right=true;
+                break;
+            case "BWall":
+                ball.down=false;
+                ball.up=true;
+                break;
+            default:
+                ball.stop();
+                break;
+        }
+    } else {
+        ball.drawObject();
+    }
+}
+
+
 /* Checks objects to determine if   *
  * all keys and values are the same */
 Object.defineProperty(Object.prototype, "equals", {
