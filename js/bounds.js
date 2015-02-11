@@ -15,8 +15,8 @@
     document.body.scrollHeight
     document.body.scrollWidth
  */
-function bounds() {
-    this.objectDimen={platform: {height: .02, width: .10}, ball: {height: .03, width: .03}};
+function Bound() {
+    this.objectDimen={platform: {height: .02, width: .10}, ball: {height: .03, width: .03}, brick: {height: .03, width: .03}};
     this.wall={left: null, top: null, right: null, bottom: null};
     this.browserHeight=null, this.browserWidth=null;
     this.object=document.getElementById("boundary");
@@ -30,8 +30,8 @@ function bounds() {
     this.align=null;
 
     this.sizeAndPosition = function(object, idle) {
-        var h=this.length * this.objectDimen[object.id].height;
-        var w=this.length * this.objectDimen[object.id].width;
+        var h=this.length * this.objectDimen[object.name].height;
+        var w=this.length * this.objectDimen[object.name].width;
         var l= (idle ? (this.length-w) / 2 : parseInt(object.dimensions.left))+this.wall.left;
         var t= idle ? this.length-h : parseInt(object.dimensions.top);
         return {

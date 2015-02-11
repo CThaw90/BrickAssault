@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-function event(bounds, platform, ball, collision) {
+function Event(bounds, platform, ball, collision) {
     this.launch=function() {
         
         window.document.body.onkeydown=

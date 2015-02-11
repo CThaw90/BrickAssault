@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-function ball() {
+function Ball() {
     // Determines the current direction of a moving ball object
     this.up=true, this.right=true, this.left=false, this.down=false;
     
@@ -20,11 +20,8 @@ function ball() {
     this.dimensions=null;
     
     // Identifier string for the object
+    this.name=String("ball");
     this.id=String("ball");
-    
-    // The collision detection object for
-    // the ball trajectory
-    this.detector=collision;
     
     // The current event id of an active ball
     this.handle=null;

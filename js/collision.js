@@ -1,5 +1,5 @@
 /* collision.js */
-function collision() {
+function Collision() {
     this.objects = {};
 
     this.registerObject=function(object) {
@@ -33,13 +33,10 @@ function collision() {
                              };
                 }
             }
-//            else if (parseInt(this.objects[key].dimensions.left) <= parseInt(pos.left)+parseInt(pos.width) && 
-//                     (parseInt(this.objects[) {
-//            }
             else if (parseInt(this.objects[key].dimensions.top) <= parseInt(pos.top)+parseInt(pos.height) &&
                      parseInt(this.objects[key].dimensions.left) <= parseInt(pos.left)+parseInt(pos.width) &&
-                     parseInt(this.objects[key].dimensions.left)+parseInt(this.objects[key].dimensions.width) >= parseInt(pos.left)) {
-//                result = {platform: this.objects[key].dimensions, ball: pos};
+                     parseInt(this.objects[key].dimensions.left)+parseInt(this.objects[key].dimensions.width) >= parseInt(pos.left) &&
+                     parseInt(this.objects[key].dimensions.top)+parseInt(this.objects[key].dimensions.height) > parseInt(pos.top)) {
                 result = {details: String("Collided with "+this.objects[key].id+" at x="+parseInt(pos.left)+
                                           " y="+parseInt(this.objects[key].dimensions.top)), 
                           object: "Platform", x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top)
