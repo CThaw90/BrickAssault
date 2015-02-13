@@ -75,16 +75,16 @@ function ball() {
         var location=parseInt(this.dimensions.left);
         if (location+x > 0 && location+x+parseInt(this.dimensions.width) < window.innerWidth) {
             this.dimensions.left=String(parseInt(this.dimensions.left)+x)+"px";
-            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            this.drawObject();
             moved=true;
         } else if (location+x < 0 && location!==0) {
             this.dimensions.left="0px";
-            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            this.drawObject();
             moved=true;
         } else if (location+x+parseInt(this.dimensions.width) > window.innerWidth
                    && location+this.dimensions.width!==window.innerWidth) {
             this.dimensions.left=(window.innerWidth-parseInt(this.dimensions.width))+"px";
-            this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+            this.drawObject();
             moved=true;
         }
         
