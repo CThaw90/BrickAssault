@@ -43,29 +43,47 @@ function traject(ball, detector) {
     if (moved) {
         console.log("Detected a collision @:");
         console.log(moved);
-        switch (moved.object) {
-            case "RWall":
+        switch (moved.dir) {
+            // Collides with the right wall
+            case 20:
                 ball.left=true;
                 ball.right=false;
                 break;
-            case "TWall":
+            // Collides with the top wall
+            case 10:
                 ball.down=true;
                 ball.up=false;
                 break;
-            case "LWall":
+            // Collides with the left wall
+            case 40:
                 ball.left=false;
                 ball.right=true;
                 break;
-            case "BWall":
+            // Collides with the bottom Wall
+            case 30:
                 ball.stop();
                 break;
-            case "Platform":
+            case "platform":
                 ball.down=!ball.down;
                 ball.up=!ball.up;
                 break;
-            default:
-                ball.stop();
+            case 1:
+                ball.down=!ball.down;
+                ball.up=!ball.up;
                 break;
+            case 2:
+                ball.right=!ball.right;
+                ball.left=!ball.left;
+                break;
+            case 3:
+                ball.down=!ball.down;
+                ball.up=!ball.up;
+                break;
+            case 4:
+                ball.right=!ball.right;
+                ball.left=!ball.left;
+                break;
+
         }
     } else {
         ball.drawObject();

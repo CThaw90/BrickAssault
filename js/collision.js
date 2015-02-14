@@ -14,22 +14,22 @@ function Collision() {
                 var wall = this.objects[key].wall;
                 if (wall.left===parseInt(pos.left) || wall.left > parseInt(pos.left)) {
                     result = {details: String("Collided with left wall at x="+wall.left+" y="+parseInt(pos.top)),
-                              object: "LWall", x: wall.left, y: parseInt(pos.top)
+                              object: "LWall", x: wall.left, y: parseInt(pos.top), dir: 40
                              };
                 }
                 else if (wall.right===parseInt(pos.left)+parseInt(pos.width) || wall.right < parseInt(pos.left)+parseInt(pos.width)) {
                     result = {details: String("Collided with right wall at x="+wall.right+" y="+parseInt(pos.top)),
-                              object: "RWall", x: wall.right, y: parseInt(pos.top)
+                              object: "RWall", x: wall.right, y: parseInt(pos.top), dir: 20
                              };
                 }
                 else if (wall.top===parseInt(pos.top) || wall.top > parseInt(pos.top)) {
                     result = {details: String("Collided with top wall at x="+pos.left+" y="+parseInt(wall.top)),
-                              object: "TWall", x: parseInt(pos.left), y: wall.top
+                              object: "TWall", x: parseInt(pos.left), y: wall.top, dir: 10
                              };
                 }
                 else if (wall.bottom===parseInt(pos.top)+pos.height || wall.bottom < parseInt(pos.top)+parseInt(pos.height)) {
                     result = {details: String("Collided with bottom wall at x="+pos.left+" y="+parseInt(wall.bottom)),
-                              object: "BWall", x: parseInt(pos.left), y: wall.bottom
+                              object: "BWall", x: parseInt(pos.left), y: wall.bottom, dir: 30
                              };
                 }
             }
@@ -37,9 +37,26 @@ function Collision() {
                      parseInt(this.objects[key].dimensions.left) <= parseInt(pos.left)+parseInt(pos.width) &&
                      parseInt(this.objects[key].dimensions.left)+parseInt(this.objects[key].dimensions.width) >= parseInt(pos.left) &&
                      parseInt(this.objects[key].dimensions.top)+parseInt(this.objects[key].dimensions.height) > parseInt(pos.top)) {
+                var vert=pos.top-parseInt(this.objects[key].dimensions.top), horz=pos.left-parseInt(this.objects[key].dimensions.left);
+                // var direction = pos.left < parseInt(this.objects[key].dimensions.left) ? "Left" : undefined;
+                // direction = !direction && pos.left > parseInt(this.objects[key].dimensions.left) ? "Right" : direction;
+                // direction = !direction && pos.top > parseInt(this.objects[key].dimensions.top) ? "Top" : direction;
+                // direction = !direction && pos.top < parseInt(this.objects[key].dimensions.top) ? "Bottom" : direction;
+                // Specifies the location on which the collision occurred for the given object
+                // 1: Top 
+                // 2: Right
+                // 3: Bottom
+                // 4: Left
+                var direction=null; // 1: Top
+                console.log(vert);
+                console.log(horz);
+                if (Math.abs(vert) > Math.abs(horz)) direction=vert < 0 ? 1 : 3;
+                else if (Math.abs(vert) < Math.abs(horz)) direction=horz < 0 ? 2 : 4;
+                // console.log("Ball Left="+pos.left+" Brick Left="+this.objects[key].dimensions.left);
+                // console.log("Ball Top="+pos.top+" Brick Top="+this.objects[key].dimensions.top);
                 result = {details: String("Collided with "+this.objects[key].id+" at x="+parseInt(pos.left)+
                                           " y="+parseInt(this.objects[key].dimensions.top)), 
-                          object: "Platform", x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top)
+                          object: this.objects[key].id, x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top), dir: direction
                          };
             }
         }

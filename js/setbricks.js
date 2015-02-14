@@ -21,10 +21,8 @@ function SetBricks() {
 
     bricks["rb-01"]=new Brick("rb-01");
     var d=bounds.sizeAndPosition(bricks["rb-01"], true);
-//    dimensions.left=bounds.wall.left+(bounds.length*.05);
-//    dimensions.top=bounds.wall.top+(bounds.length*.35);
-    dimensions.left=468;
-    dimensions.top=235;
+    dimensions.left=bounds.wall.left+(bounds.length*.35);
+    dimensions.top=bounds.wall.top+(bounds.length*.35);
     
     dimensions.height=parseInt(d.height);
     dimensions.width=parseInt(d.width);
@@ -36,6 +34,22 @@ function SetBricks() {
     
     dimensions={};
     
+    createBrickSprite("rb-02");
+    bricks["rb-02"]=new Brick("rb-02");
+    d=bounds.sizeAndPosition(bricks["rb-02"], true);
+    dimensions.left=parseInt(bricks["rb-01"].dimensions.left)+parseInt(bricks["rb-01"].dimensions.width+2);
+    dimensions.top=parseInt(bricks["rb-01"].dimensions.top);
+
+    dimensions.height=parseInt(d.height);
+    dimensions.width=parseInt(d.width);
+    dimensions.position=d.position;
+
+    bricks["rb-02"].setDimensions(dimensions);
+    collision.registerObject(bricks["rb-02"]);
+    bricks["rb-02"].drawObject();
+
+    dimensions={};
+
 //    createBrickSprite("gb-01");
 //    
 //    bricks["gb-01"]=new Brick("gb-01");
@@ -58,8 +72,8 @@ function createBrickSprite(id) {
     var type=id.split("-")[0];
     var div=document.createElement("div");
     div.setAttribute("id", id);
-    div.setAttribute("class", "game-object");
+    div.setAttribute("class", "game-object brick");
 //  div.setAttribute("style", "display: none");
-    div.appendChild(brickTypes[type]);
+    div.appendChild(brickTypes[type].cloneNode());
     document.body.appendChild(div);
 }
