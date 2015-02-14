@@ -35,7 +35,7 @@ function Ball() {
         
         this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
         this.object.setAttribute("style", stringifyToCSS(this.dimensions));
-        
+        this.active=false;
     };
     
     // Specifies the location of an object
@@ -56,7 +56,6 @@ function Ball() {
     this.stop=function() {
         if (this.active && this.handle) {
             window.clearInterval(this.handle);
-            this.active = false;
         }
     };
 

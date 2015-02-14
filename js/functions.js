@@ -41,8 +41,8 @@ function traject(ball, detector) {
     ball.dimensions.id=ball.id;
     var moved=detector.detect(ball.dimensions);
     if (moved) {
-        console.log("Detected a collision @:");
-        console.log(moved);
+        // console.log("Detected a collision @:");
+        // console.log(moved);
         switch (moved.dir) {
             // Collides with the right wall
             case 20:
@@ -63,7 +63,8 @@ function traject(ball, detector) {
             case 30:
                 ball.stop();
                 break;
-            case "platform":
+            // Ball Collided with the platform
+            case -1: 
                 ball.down=!ball.down;
                 ball.up=!ball.up;
                 break;

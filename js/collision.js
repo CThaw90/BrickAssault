@@ -38,22 +38,12 @@ function Collision() {
                      parseInt(this.objects[key].dimensions.left)+parseInt(this.objects[key].dimensions.width) >= parseInt(pos.left) &&
                      parseInt(this.objects[key].dimensions.top)+parseInt(this.objects[key].dimensions.height) > parseInt(pos.top)) {
                 var vert=pos.top-parseInt(this.objects[key].dimensions.top), horz=pos.left-parseInt(this.objects[key].dimensions.left);
-                // var direction = pos.left < parseInt(this.objects[key].dimensions.left) ? "Left" : undefined;
-                // direction = !direction && pos.left > parseInt(this.objects[key].dimensions.left) ? "Right" : direction;
-                // direction = !direction && pos.top > parseInt(this.objects[key].dimensions.top) ? "Top" : direction;
-                // direction = !direction && pos.top < parseInt(this.objects[key].dimensions.top) ? "Bottom" : direction;
                 // Specifies the location on which the collision occurred for the given object
-                // 1: Top 
-                // 2: Right
-                // 3: Bottom
-                // 4: Left
-                var direction=null; // 1: Top
-                console.log(vert);
-                console.log(horz);
+                // 1: Top | 2: Right | 3: Bottom | 4: Left
+                var direction=null;
                 if (Math.abs(vert) > Math.abs(horz)) direction=vert < 0 ? 1 : 3;
                 else if (Math.abs(vert) < Math.abs(horz)) direction=horz < 0 ? 2 : 4;
-                // console.log("Ball Left="+pos.left+" Brick Left="+this.objects[key].dimensions.left);
-                // console.log("Ball Top="+pos.top+" Brick Top="+this.objects[key].dimensions.top);
+                direction = key==="platform" ? -1 : direction;
                 result = {details: String("Collided with "+this.objects[key].id+" at x="+parseInt(pos.left)+
                                           " y="+parseInt(this.objects[key].dimensions.top)), 
                           object: this.objects[key].id, x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top), dir: direction
