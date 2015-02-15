@@ -14,22 +14,22 @@ function Collision() {
                 var wall = this.objects[key].wall;
                 if (wall.left===parseInt(pos.left) || wall.left > parseInt(pos.left)) {
                     result = {details: String("Collided with left wall at x="+wall.left+" y="+parseInt(pos.top)),
-                              object: "LWall", x: wall.left, y: parseInt(pos.top), dir: 40
+                              object: wall, x: wall.left, y: parseInt(pos.top), dir: 40
                              };
                 }
                 else if (wall.right===parseInt(pos.left)+parseInt(pos.width) || wall.right < parseInt(pos.left)+parseInt(pos.width)) {
                     result = {details: String("Collided with right wall at x="+wall.right+" y="+parseInt(pos.top)),
-                              object: "RWall", x: wall.right, y: parseInt(pos.top), dir: 20
+                              object: wall, x: wall.right, y: parseInt(pos.top), dir: 20
                              };
                 }
                 else if (wall.top===parseInt(pos.top) || wall.top > parseInt(pos.top)) {
                     result = {details: String("Collided with top wall at x="+pos.left+" y="+parseInt(wall.top)),
-                              object: "TWall", x: parseInt(pos.left), y: wall.top, dir: 10
+                              object: wall, x: parseInt(pos.left), y: wall.top, dir: 10
                              };
                 }
                 else if (wall.bottom===parseInt(pos.top)+pos.height || wall.bottom < parseInt(pos.top)+parseInt(pos.height)) {
                     result = {details: String("Collided with bottom wall at x="+pos.left+" y="+parseInt(wall.bottom)),
-                              object: "BWall", x: parseInt(pos.left), y: wall.bottom, dir: 30
+                              object: wall, x: parseInt(pos.left), y: wall.bottom, dir: 30
                              };
                 }
             }
@@ -46,7 +46,7 @@ function Collision() {
                 direction = key==="platform" ? -1 : direction;
                 result = {details: String("Collided with "+this.objects[key].id+" at x="+parseInt(pos.left)+
                                           " y="+parseInt(this.objects[key].dimensions.top)), 
-                          object: this.objects[key].id, x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top), dir: direction
+                          object: this.objects[key], x: parseInt(pos.left), y: parseInt(this.objects[key].dimensions.top), dir: direction
                          };
             }
         }

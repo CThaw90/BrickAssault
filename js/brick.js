@@ -22,5 +22,7 @@ function Brick(id) {
         this.object.setAttribute("style", css);
     };
 
-
+    this.remove=function() {
+        return this.object.parentNode.removeChild(this.object);
+    };
 }

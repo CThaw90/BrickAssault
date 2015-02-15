@@ -39,11 +39,11 @@ function traject(ball, detector) {
     ball.dimensions.height=parseInt(ball.dimensions.height);
     ball.dimensions.width=parseInt(ball.dimensions.width);
     ball.dimensions.id=ball.id;
-    var moved=detector.detect(ball.dimensions);
-    if (moved) {
+    var colObj=detector.detect(ball.dimensions);
+    if (colObj) {
         // console.log("Detected a collision @:");
-        // console.log(moved);
-        switch (moved.dir) {
+        console.log(colObj);
+        switch (colObj.dir) {
             // Collides with the right wall
             case 20:
                 ball.left=true;
@@ -85,6 +85,9 @@ function traject(ball, detector) {
                 ball.left=!ball.left;
                 break;
 
+        }
+        if (colObj.object.name==="brick") {
+            console.log(colObj.object.remove());
         }
     } else {
         ball.drawObject();
