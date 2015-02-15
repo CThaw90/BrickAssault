@@ -42,7 +42,7 @@ function traject(ball, detector) {
     var colObj=detector.detect(ball.dimensions);
     if (colObj) {
         // console.log("Detected a collision @:");
-        console.log(colObj);
+        // console.log(colObj);
         switch (colObj.dir) {
             // Collides with the right wall
             case 20:
@@ -86,8 +86,9 @@ function traject(ball, detector) {
                 break;
 
         }
-        if (colObj.object.name==="brick") {
-            console.log(colObj.object.remove());
+        if (colObj.object.name==="brick" && colObj.object.remove()) {
+            console.log(colObj);
+            delete bricks[colObj.object.id];
         }
     } else {
         ball.drawObject();

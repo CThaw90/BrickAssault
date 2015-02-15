@@ -37,7 +37,7 @@ function SetBricks() {
     createBrickSprite("rb-02");
     bricks["rb-02"]=new Brick("rb-02");
     d=bounds.sizeAndPosition(bricks["rb-02"], true);
-    dimensions.left=parseInt(bricks["rb-01"].dimensions.left)+parseInt(bricks["rb-01"].dimensions.width+2);
+    dimensions.left=parseInt(bricks["rb-01"].dimensions.left)+parseInt(bricks["rb-01"].dimensions.width)+2;
     dimensions.top=parseInt(bricks["rb-01"].dimensions.top);
 
     dimensions.height=parseInt(d.height);
@@ -50,6 +50,21 @@ function SetBricks() {
 
     dimensions={};
 
+    createBrickSprite("rb-03");
+    bricks["rb-03"]=new Brick("rb-03");
+    d=bounds.sizeAndPosition(bricks["rb-03"], true);
+    dimensions.left=parseInt(bricks["rb-02"].dimensions.left)+parseInt(bricks["rb-02"].dimensions.width)+2;
+    dimensions.top=parseInt(bricks["rb-02"].dimensions.top);
+
+    dimensions.height=parseInt(d.height);
+    dimensions.width=parseInt(d.width);
+    dimensions.position=d.position;
+
+    bricks["rb-03"].setDimensions(dimensions);
+    collision.registerObject(bricks["rb-03"]);
+    bricks["rb-03"].drawObject();
+
+    dimensions={};
 //    createBrickSprite("gb-01");
 //    
 //    bricks["gb-01"]=new Brick("gb-01");
