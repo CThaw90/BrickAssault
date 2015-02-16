@@ -5,7 +5,9 @@ function Collision() {
     this.registerObject=function(object) {
         this.objects[object.id]=object;
     };
-
+    this.unregisterObjectById=function(id) {
+      delete this.objects[id];
+    };
     this.detect=function(pos) {
         var result=false;
         for (var key in this.objects) {

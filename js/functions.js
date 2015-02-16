@@ -87,7 +87,7 @@ function traject(ball, detector) {
 
         }
         if (colObj.object.name==="brick" && colObj.object.remove()) {
-            console.log(colObj);
+            collision.unregisterObjectById(colObj.object.id);
             delete bricks[colObj.object.id];
         }
     } else {
