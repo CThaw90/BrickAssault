@@ -2,8 +2,9 @@
  * Created by Chris on 1/14/2015.
  */
 
-function platform() {
+function Platform() {
     this.object=document.getElementById("platform");
+    this.name=String("platform");
     this.id=String("platform");
     this.dimensions=null;
     this.active=false;

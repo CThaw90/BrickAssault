@@ -39,35 +39,58 @@ function traject(ball, detector) {
     ball.dimensions.height=parseInt(ball.dimensions.height);
     ball.dimensions.width=parseInt(ball.dimensions.width);
     ball.dimensions.id=ball.id;
-    var moved=detector.detect(ball.dimensions);
-    if (moved) {
-        console.log("Detected collision @:");
-        console.log(moved);
-        switch (moved.object) {
-            case "RWall":
+    var colObj=detector.detect(ball.dimensions);
+    if (colObj) {
+        // console.log("Detected a collision @:");
+        // console.log(colObj);
+        switch (colObj.dir) {
+            // Collides with the right wall
+            case 20:
                 ball.left=true;
                 ball.right=false;
                 break;
-            case "TWall":
+            // Collides with the top wall
+            case 10:
                 ball.down=true;
                 ball.up=false;
                 break;
-            case "LWall":
+            // Collides with the left wall
+            case 40:
                 ball.left=false;
                 ball.right=true;
                 break;
-            case "BWall":
+            // Collides with the bottom Wall
+            case 30:
                 ball.stop();
                 ball.initPosition(platform);
                 break;
-            case "Platform":
+            // Ball Collided with the platform
+            case -1: 
                 ball.down=!ball.down;
                 ball.up=!ball.up;
                 break;
-            default:
-                ball.stop();
-
+            case 1:
+                ball.down=!ball.down;
+                ball.up=!ball.up;
                 break;
+            case 2:
+                ball.right=!ball.right;
+                ball.left=!ball.left;
+                break;
+            case 3:
+                ball.down=!ball.down;
+                ball.up=!ball.up;
+                break;
+            case 4:
+                ball.right=!ball.right;
+                ball.left=!ball.left;
+                break;
+
+        }
+        if (colObj.object.name==="brick" && colObj.object.remove()) {
+            collision.unregisterObjectById(colObj.object.id);
+            delete bricks[colObj.object.id];
+            // if ()
         }
     } else {
         ball.drawObject();
@@ -97,4 +120,12 @@ Object.defineProperty(Object.prototype, "toogleStartMsg", {
 		var msg = document.getElementById("startMessage");
 		msg.style.visiblity = toggle ? "visible" : "hidden";
 	}
+});
+
+/* Checks if the calling object is empty */
+Object.defineProperty(Object.prototype, "isEmpty", {
+    enumerable: false,
+    value: function() {
+        return !Object.keys(this);
+    }
 });

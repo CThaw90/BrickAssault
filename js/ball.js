@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 1/11/2015.
  */
-function ball() {
+function Ball() {
     // Determines the current direction of a moving ball object
     this.up=true, this.right=true, this.left=false, this.down=false;
     
@@ -9,6 +9,9 @@ function ball() {
     this.object=document.getElementById("ball");
     
     // Determines if the ball object is moving
+    this.moving=false;
+
+    // Determines if the ball object has been launched
     this.active=false;
     
     // Determines the number of pixels a ball 
@@ -20,11 +23,8 @@ function ball() {
     this.dimensions=null;
     
     // Identifier string for the object
+    this.name=String("ball");
     this.id=String("ball");
-    
-    // The collision detection object for
-    // the ball trajectory
-    this.detector=collision;
     
     // The current event id of an active ball
     this.handle=null;
@@ -38,7 +38,8 @@ function ball() {
         
         this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
         this.object.setAttribute("style", stringifyToCSS(this.dimensions));
-        
+        this.moving=false;
+        this.active=false;
     };
     
     // Specifies the location of an object
@@ -49,17 +50,19 @@ function ball() {
     
     // Starts the trajectory movement of the ball
     this.start=function(detector) {
-        if (!this.active) {
+        if (!this.moving) {
             this.active=true;
+            this.moving=true;
             this.handle=window.setInterval(traject, 1, this, detector);
         }
     };
     
     // Stops the trajectory movement of the ball
     this.stop=function() {
-        if (this.active && this.handle) {
+        if (this.moving && this.handle) {
             window.clearInterval(this.handle);
-            this.active = false;
+            this.moving=false;
+            this.active=false; // Uncommenting for testing
         }
     };
 
