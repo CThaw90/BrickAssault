@@ -65,11 +65,25 @@ function SetBricks() {
     bricks["rb-03"].drawObject();
 
     dimensions={};
-//    createBrickSprite("gb-01");
-//    
-//    bricks["gb-01"]=new Brick("gb-01");
-//    var d=bounds.sizeAndPosition(bricks["gb-01"], true);
-//    dimensions.left=bricks["rb-01"].left+bricks
+
+    createBrickSprite("rb-04");
+    bricks["rb-04"]=new Brick("rb-04");
+    d=bounds.sizeAndPosition(bricks["rb-04"], true);
+    dimensions.left=parseInt(bricks["rb-03"].dimensions.left)+parseInt(bricks["rb-03"].dimensions.width)+2;
+    dimensions.top=parseInt(bricks["rb-03"].dimensions.top);
+
+    dimensions.height=parseInt(d.height);
+    dimensions.width=parseInt(d.width);
+    dimensions.position=d.position;
+
+    bricks["rb-04"].setDimensions(dimensions);
+    collision.registerObject(bricks["rb-04"]);
+    bricks["rb-04"].drawObject();
+
+    dimensions={};
+
+    createBrickSprite("rb-05");
+    bricks[""]
 }
         
 function createBrickTypes() {

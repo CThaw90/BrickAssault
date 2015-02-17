@@ -89,6 +89,9 @@ function traject(ball, detector) {
         if (colObj.object.name==="brick" && colObj.object.remove()) {
             collision.unregisterObjectById(colObj.object.id);
             delete bricks[colObj.object.id];
+            if (bricks.isEmpty()) {
+                console.log("Game is finished");
+            }
         }
     } else {
         ball.drawObject();
@@ -118,4 +121,12 @@ Object.defineProperty(Object.prototype, "toogleStartMsg", {
 		var msg = document.getElementById("startMessage");
 		msg.style.visiblity = toggle ? "visible" : "hidden";
 	}
+});
+
+/* Checks if the calling object is empty */
+Object.defineProperty(Object.prototype, "isEmpty", {
+    enumerable: false,
+    value: function() {
+        return !Object.keys(this).length;
+    }
 });
