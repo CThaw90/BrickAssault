@@ -11,6 +11,9 @@ var brickTypes={};
 // An object that keeps track of all bricks by their ids
 var bricks={};
 
+// Raw Data of a loaded JSON file
+var content=null, level=null;
+
 // Sets and organizes the bricks according to their level
 function SetBricks() {
     var dimensions={};
@@ -65,11 +68,6 @@ function SetBricks() {
     bricks["rb-03"].drawObject();
 
     dimensions={};
-//    createBrickSprite("gb-01");
-//    
-//    bricks["gb-01"]=new Brick("gb-01");
-//    var d=bounds.sizeAndPosition(bricks["gb-01"], true);
-//    dimensions.left=bricks["rb-01"].left+bricks
 }
         
 function createBrickTypes() {
@@ -91,4 +89,116 @@ function createBrickSprite(id) {
 //  div.setAttribute("style", "display: none");
     div.appendChild(brickTypes[type].cloneNode());
     document.body.appendChild(div);
+}
+
+function loadData() {
+    var input=document.getElementById("level");
+    if (!content && input.files.length && input.files[0].type==="application/json") {
+        var r=new FileReader();
+        r.onload=function(e) {
+            content=e.target.result;
+        }
+        r.readAsText(input.files[0]);
+        document.getElementById("loading").innerHTML="File Loaded";
+    }
+    else if (!content) {
+        console.log("Error");
+    }
+
+}
+
+function loadLevel() {
+    // try {
+        level=JSON.parse(content);
+        loadBrickTypes(level.level.config);
+        drawLevelStage(level.level.layout);
+    // } catch (SyntaxError) {
+    //     console.log(SyntaxError);
+    // }
+}
+
+function loadBrickTypes(config) {
+    if (config.types) {
+        var types=config.types
+        for (var key in types) {
+            brickTypes[key]=document.createElement("img");
+            brickTypes[key].setAttribute("alt", "brick");
+            brickTypes[key].setAttribute("class", "sprite-img");
+            brickTypes[key].setAttribute("src", types[key]);
+        }
+    }
+}
+
+function drawLevelStage(layout) {
+    // console.log(layout);
+    var layoutCache={};
+    for (var i=0; i < layout.length; i++) {
+        // console.log(layout[i]);
+        if (layoutCache[layout[i].id]) {
+            console.log(layout[i].id+" already an existing id");
+        }
+
+        var div=document.createElement("div");
+        layoutCache[layout[i].id]=layout[i];
+        div.setAttribute("id", layout[i].id);
+        div.setAttribute("class", "game-object brick");
+        div.appendChild(brickTypes[layout[i].type].cloneNode());
+        document.body.appendChild(div);
+
+
+        bricks[layout[i].id]=new Brick(layout[i].id);
+        var dimensions={};
+        var d=bounds.sizeAndPosition(bricks[layout[i].id], true);
+
+        dimensions.height=parseInt(d.height);
+        dimensions.width=parseInt(d.width);
+        dimensions.position=d.position;    
+
+        var positioning=layout[i].position;
+        if (!positioning.left && !positioning.top) {
+            if (positioning.rightOf && bricks[positioning.rightOf]) {
+                var b=bricks[positioning.rightOf];
+                dimensions.left=parseInt(b.dimensions.left)+parseInt(b.dimensions.width)+2;
+                dimensions.top=parseInt(b.dimensions.top);
+            } 
+            else if (positioning.leftOf && bricks[positioning.leftOf]) {
+                var b=bricks[positioning.leftOf];
+                dimensions.left=parseInt(b.dimensions.left)-parseInt(b.dimensions.width)-2;
+                dimensions.top=parseInt(b.dimensions.top);
+            }
+            else if (positioning.above && bricks[positioning.above]) {
+                var b=bricks[positioning.above];
+                dimensions.top=parseInt(b.dimensions.top)-parseInt(b.dimensions.height)-2;
+                dimensions.left=parseInt(b.dimensions.left);
+            }
+            else if (positioning.below && bricks[positioning.below]) {
+                var b=bricks[positioning.below];
+                dimensions.top=parseInt(b.dimensions.top)+parseInt(b.dimensions.height)+2;
+                dimensions.left=parseInt(b.dimensions.left);
+            } else {
+                console.log("Level Syntax Error");
+                console.log(positioning);
+            }
+        }
+        else if (!isNaN(positioning.left) && !isNaN(positioning.top)) {
+            if (positioning.left < 1) {
+                dimensions.left=bounds.wall.left+(bounds.length*positioning.left);
+            } else {
+                dimensions.left=positioning.left;
+            }
+
+            if (positioning.top < 1) {
+                dimensions.top=bounds.wall.top+(bounds.length*positioning.top);
+            } else {
+                dimensions.top=positioning.top;
+            }
+        }
+        else {
+            console.log("Level Syntax Error");
+        }
+
+        bricks[layout[i].id].setDimensions(dimensions);
+        collision.registerObject(bricks[layout[i].id]);
+        bricks[layout[i].id].drawObject();
+    }
 }

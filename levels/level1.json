@@ -1,0 +1,467 @@
+{
+	"name": "Getting Started With Brick Assault",
+	"level" : {
+		"config": {
+			"types" : {
+				"yellow" : "img/yb.png",
+				"red" : "img/rb.png",
+				"blue" : "img/bb.png",
+				"purple" : "img/pb.png",
+				"green" : "img/gb.png"
+			}
+		},
+
+		"layout" : [
+			{
+				"id" : "01",
+				"type" : "red",
+				"object" : "brick",
+				"position" : {
+					"left"	: 0.35,
+					"top"	: 0.35
+				}
+			},
+
+			{
+				"id" : "02",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "01"
+				}
+			},
+
+			{
+				"id" : "03",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "02"
+				}
+			},
+
+			{
+				"id" : "04",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "03"
+				}
+			},
+
+			{
+				"id" : "05",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "04"
+		 		}
+			},
+
+			{
+				"id" : "06",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "05"
+				}
+			},
+
+			{
+				"id" : "07",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "06"
+				}
+			},
+
+			{
+				"id" : "08",
+				"object" : "brick",
+				"type" : "red", 
+				"position" : {
+					"rightOf" : "07"
+				}
+			},
+
+			{
+				"id" : "09",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "08"
+				}
+			},
+
+			{
+				"id" : "10",
+				"object" : "brick",
+				"type" : "red",
+				"position" : {
+					"rightOf" : "09"
+				}
+			},
+
+			{
+				"id" : "11",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"below" : "01"
+				}
+			},
+
+			{
+				"id" : "12",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "11"
+				}
+			},
+
+			{
+				"id" : "13",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "12"
+				}
+			},
+
+			{
+				"id" : "14",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "13"
+				}
+			},
+
+			{
+				"id" : "15",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "14"
+				}
+			},
+
+			{
+				"id" : "16",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "15"
+				}
+			},
+
+			{
+				"id" : "17",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "16"
+				}
+			},
+
+			{
+				"id" : "18",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "17"
+				}
+			},
+
+			{
+				"id" : "19",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "18"
+				}
+			},
+
+			{
+				"id" : "20",
+				"object" : "brick",
+				"type" : "green",
+				"position" : {
+					"rightOf" : "19"
+				}
+			},
+
+			{
+				"id" : "21",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"below" : "11"
+				}
+			},
+
+			{
+				"id" : "22",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "21"
+				}
+			},
+
+			{
+				"id" : "23",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "22"
+				}
+			},
+
+			{
+				"id" : "24",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "23"
+				}
+			},
+
+			{
+				"id" : "25",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "24"
+				}
+			},
+
+			{
+				"id" : "26",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "25"
+				}
+			},
+
+			{
+				"id" : "27",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "26"
+				}
+			},
+
+			{
+				"id" : "28",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "27"
+				}
+			},
+
+			{
+				"id" : "29",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "28"
+				}
+			},
+
+			{
+				"id" : "30",
+				"object" : "brick",
+				"type" : "blue",
+				"position" : {
+					"rightOf" : "29"
+				}
+			},
+
+			{
+				"id" : "31",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"below" : "21"
+				}
+			},
+
+			{
+				"id" : "32",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "31"
+				}
+			},
+
+			{
+				"id" : "33",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "32"
+				}
+			},
+
+			{
+				"id" : "34",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "33"
+				}
+			},
+
+			{
+				"id" : "35",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "34"
+				}
+			},
+
+			{
+				"id" : "36",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "35"
+				}
+			},
+
+			{
+				"id" : "37",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "36"
+				}
+			},
+
+			{
+				"id" : "38",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "37"
+				}
+			},
+
+			{
+				"id" : "39",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "38"
+				}
+			},
+
+			{
+				"id" : "40",
+				"object" : "brick",
+				"type" : "yellow",
+				"position" : {
+					"rightOf" : "39"
+				}
+			},
+
+			{
+				"id" : "41",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"above" : "01"
+				}
+			},
+
+			{
+				"id" : "42",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "41"
+				}
+			},
+
+			{
+				"id" : "43",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "42"
+				}
+			},
+
+			{
+				"id" : "44",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "43"
+				}
+			},
+
+			{
+				"id" : "45",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "44"
+				}
+			},
+
+			{
+				"id" : "46",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "45"
+				}
+			},
+
+			{
+				"id" : "47",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "46"
+				}
+			},
+
+			{
+				"id" : "48",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "47"
+				}
+			},
+
+			{
+				"id" : "49",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "48"
+				}
+			},
+
+			{
+				"id" : "50",
+				"object" : "brick",
+				"type" : "purple",
+				"position" : {
+					"rightOf" : "49"
+				}
+			}
+		]
+	}
+}

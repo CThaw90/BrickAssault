@@ -8,6 +8,8 @@ var ball,
     event;
 
 function start() {
+    var s=document.getElementById("startMessage");
+    s.parentNode.removeChild(s);
     ball=new Ball();
     bounds = new Bound();
     platform=new Platform();
@@ -20,6 +22,10 @@ function start() {
     platform.setDimensions(bounds.sizeAndPosition(platform, true));
     ball.setDimensions(bounds.sizeAndPosition(ball, true));
     ball.initPosition(platform);
-    SetBricks();
+    if (content) { 
+        loadLevel(); 
+    } else { 
+        SetBricks();
+    }
     event.launch();
 }
