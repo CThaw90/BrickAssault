@@ -1,0 +1,21 @@
+// level1.json
+{
+	"name" : "Intro Level - Introduction to Brick Assault MMO",
+	"level" : {
+		"config" : {
+			"types" : {
+				"yellow" : "img/yb.png",
+				"red" : "img/rb.png",
+				"blue" : "img/bb.png",
+				"purple" : "img/pb.png",
+				"green" : "img/gb.png"
+			}
+		},
+
+		"layout" : [
+			{
+				
+			}
+		]
+	}
+}
