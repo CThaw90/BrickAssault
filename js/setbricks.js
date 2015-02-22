@@ -13,62 +13,6 @@ var bricks={};
 
 // Raw Data of a loaded JSON file
 var content=null, level=null;
-
-// Sets and organizes the bricks according to their level
-function SetBricks() {
-    var dimensions={};
-    createBrickTypes();
-    
-    // Creating Level one of Brick Assault
-    createBrickSprite("rb-01");
-
-    bricks["rb-01"]=new Brick("rb-01");
-    var d=bounds.sizeAndPosition(bricks["rb-01"], true);
-    dimensions.left=bounds.wall.left+(bounds.length*.35);
-    dimensions.top=bounds.wall.top+(bounds.length*.35);
-    
-    dimensions.height=parseInt(d.height);
-    dimensions.width=parseInt(d.width);
-    dimensions.position=d.position;
-
-    bricks["rb-01"].setDimensions(dimensions);
-    collision.registerObject(bricks["rb-01"]);
-    bricks["rb-01"].drawObject();
-    
-    dimensions={};
-    
-    createBrickSprite("rb-02");
-    bricks["rb-02"]=new Brick("rb-02");
-    d=bounds.sizeAndPosition(bricks["rb-02"], true);
-    dimensions.left=parseInt(bricks["rb-01"].dimensions.left)+parseInt(bricks["rb-01"].dimensions.width)+2;
-    dimensions.top=parseInt(bricks["rb-01"].dimensions.top);
-
-    dimensions.height=parseInt(d.height);
-    dimensions.width=parseInt(d.width);
-    dimensions.position=d.position;
-
-    bricks["rb-02"].setDimensions(dimensions);
-    collision.registerObject(bricks["rb-02"]);
-    bricks["rb-02"].drawObject();
-
-    dimensions={};
-
-    createBrickSprite("rb-03");
-    bricks["rb-03"]=new Brick("rb-03");
-    d=bounds.sizeAndPosition(bricks["rb-03"], true);
-    dimensions.left=parseInt(bricks["rb-02"].dimensions.left)+parseInt(bricks["rb-02"].dimensions.width)+2;
-    dimensions.top=parseInt(bricks["rb-02"].dimensions.top);
-
-    dimensions.height=parseInt(d.height);
-    dimensions.width=parseInt(d.width);
-    dimensions.position=d.position;
-
-    bricks["rb-03"].setDimensions(dimensions);
-    collision.registerObject(bricks["rb-03"]);
-    bricks["rb-03"].drawObject();
-
-    dimensions={};
-}
         
 function createBrickTypes() {
     
@@ -86,12 +30,11 @@ function createBrickSprite(id) {
     var div=document.createElement("div");
     div.setAttribute("id", id);
     div.setAttribute("class", "game-object brick");
-//  div.setAttribute("style", "display: none");
     div.appendChild(brickTypes[type].cloneNode());
     document.body.appendChild(div);
 }
 
-function loadData() {
+function loadFile() {
     var input=document.getElementById("level");
     var parsedFileName=input.files[0].name.split(".");
     if (!content && input.files.length && (input.files[0].type==="application/json" || (parsedFileName.length>1 && parsedFileName[1]==="json"))) {
@@ -108,7 +51,31 @@ function loadData() {
 
 }
 
-function loadLevel() {
+// Sets and organizes the bricks according to their level
+function loadLevel(level) {
+    if (isNaN(level)) return;
+    request=undefined;
+    if (window.XMLHttpRequest) {
+        request=new XMLHttpRequest();
+    }
+    switch (level) {
+        case 1:
+            request.open("GET", "http://gamesfolio.com/json/levels/level1.json", false); 
+            //request.open("GET", "file:///home/cthaw/BrickAssault/json/levels/level1.json", false);
+            break;
+        default:
+            return;
+    }
+    request.onreadystatechange=function() {
+        if (request.readyState===4 && request.status===200) {
+            content=request.responseText;
+        }
+    };
+    
+    request.send();
+    loadData();
+}
+function loadData() {
     // try {
         level=JSON.parse(content);
         loadBrickTypes(level.level.config);

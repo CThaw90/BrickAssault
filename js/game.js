@@ -25,9 +25,9 @@ function start() {
     ball.setDimensions(bounds.sizeAndPosition(ball, true));
     ball.initPosition(platform);
     if (content) { 
-        loadLevel(); 
+        loadData(); 
     } else { 
-        SetBricks();
+        loadLevel(1);
     }
     event.launch();
 }
