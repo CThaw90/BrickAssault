@@ -93,7 +93,8 @@ function createBrickSprite(id) {
 
 function loadData() {
     var input=document.getElementById("level");
-    if (!content && input.files.length && input.files[0].type==="application/json") {
+    var parsedFileName=input.files[0].name.split(".");
+    if (!content && input.files.length && (input.files[0].type==="application/json" || (parsedFileName.length>1 && parsedFileName[1]==="json"))) {
         var r=new FileReader();
         r.onload=function(e) {
             content=e.target.result;

@@ -9,7 +9,9 @@ var ball,
 
 function start() {
     var s=document.getElementById("startMessage");
+    var l=document.getElementById("loading");
     s.parentNode.removeChild(s);
+    l.parentNode.removeChild(l);
     ball=new Ball();
     bounds = new Bound();
     platform=new Platform();
