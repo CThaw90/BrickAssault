@@ -60,8 +60,8 @@ function loadLevel(level) {
     }
     switch (level) {
         case 1:
-            request.open("GET", "http://gamesfolio.com/json/levels/level1.json", false); 
-            //request.open("GET", "file:///home/cthaw/BrickAssault/json/levels/level1.json", false);
+            //request.open("GET", "http://gamesfolio.com/json/levels/level1.json", false); 
+            request.open("GET", "http://localhost/BrickAssault/levels/level1.json", false);
             break;
         default:
             return;
