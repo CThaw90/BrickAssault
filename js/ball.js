@@ -36,10 +36,14 @@ function Ball() {
         if (this.handle) 
             this.stop();
         
-        this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
-        this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+        this.dimensions.left = (parseInt(platform.dimensions.left)+(parseInt(platform.dimensions.width)/2))-parseInt(this.dimensions.width)/2;
+        this.dimensions.top = bounds.length-(parseInt(platform.dimensions.height)+parseInt(this.dimensions.height));
+        this.left=this.down=false;
+        this.up=this.right=true;
+        this.drawObject();
         this.moving=false;
         this.active=false;
+        
     };
     
     // Specifies the location of an object
@@ -97,8 +101,6 @@ function Ball() {
     // Draws a sprite object to the DOM 
     // based on the dimensions attribute
     this.drawObject=function() {
-//        console.log("Drawing...");
-//        console.log(this.dimensions);
         this.dimensions.height=parseInt(this.dimensions.height)+"px";
         this.dimensions.width=parseInt(this.dimensions.width)+"px";
         this.dimensions.left=parseInt(this.dimensions.left)+"px";
