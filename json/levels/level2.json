@@ -1,0 +1,434 @@
+{
+	"name" : "level2",
+	"level" : {
+		"config" : {
+			"types" : {
+				"yellow" : "img/yb.png",
+				"bed" : "img/rb.png",
+				"blue" : "img/bb.png",
+				"purple" : "img/pb.png",
+				"green" : "img/gb.png"
+			}
+		},
+
+		"layout" : [
+			{
+				"id" : "01",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"left" : 0.1,
+					"top" : 0.1
+				}
+			},
+			{
+				"id" : "a2",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "01"
+				}
+			},
+			{
+				"id" : "a3",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a2"
+				}
+			},
+			{
+				"id" : "a4",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a3"
+				}
+			},
+			{
+				"id" : "a5",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a4"
+				}
+			},
+			{
+				"id" : "a6",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a5"
+				}
+			},
+			{
+				"id" : "a7",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a6"
+				}
+			},
+			{
+				"id" : "a8",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a7"
+				}
+			},
+			{
+				"id" : "a9",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a8"
+				}
+			},
+			{
+				"id" : "a10",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a9"
+				}
+			},
+			{
+				"id" : "a11",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a10"
+				}
+			},
+			{
+				"id" : "a12",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a11"
+				}
+			},
+			{
+				"id" : "a13",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a12"
+				}
+			},
+			{
+				"id" : "a14",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a13"
+				}
+			},
+			{
+				"id" : "a15",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a14"
+				}
+			},
+			{
+				"id" : "a16",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a15"
+				}
+			},
+			{
+				"id" : "a17",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a16"
+				}
+			},
+			{
+				"id" : "a18",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a17"
+				}
+			},
+			{
+				"id" : "a19",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a18"
+				}
+			},
+			{
+				"id" : "a20",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a19"
+				}
+			},
+			{
+				"id" : "a21",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a20"
+				}
+			},
+			{
+				"id" : "a22",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a21"
+				}
+			},
+			{
+				"id" : "a23",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a22"
+				}
+			},
+			{
+				"id" : "a24",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a23"
+				}
+			},
+			{
+				"id" : "a25",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a24"
+				}
+			},
+			{
+				"id" : "a26",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "a25"
+				}
+			},
+			{
+				"id" : "b1",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"rightOf" : "01"
+				}
+			},
+			{
+				"id" : "b2",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b1"
+				}
+			},
+			{
+				"id" : "b3",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b2"
+				}
+			},
+			{
+				"id" : "b4",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b3"
+				}
+			},
+			{
+				"id" : "b5",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b4"
+				}
+			},
+			{
+				"id" : "b6",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b5"
+				}
+			},
+			{
+				"id" : "b7",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b6"
+				}
+			},
+			{
+				"id" : "b8",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b7"
+				}
+			},
+			{
+				"id" : "b9",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b8"
+				}
+			},
+			{
+				"id" : "b10",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b9"
+				}
+			},
+			{
+				"id" : "b11",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b10"
+				}
+			},
+			{
+				"id" : "b12",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b11"
+				}
+			},
+			{
+				"id" : "b13",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b12"
+				}
+			},
+			{
+				"id" : "b14",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b13"
+				}
+			},
+			{
+				"id" : "b15",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b14"
+				}
+			},
+			{
+				"id" : "b16",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b15"
+				}
+			},
+			{
+				"id" : "b17",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b16"
+				}
+			},
+			{
+				"id" : "b18",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b17"
+				}
+			},
+			{
+				"id" : "b19",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b18"
+				}
+			},
+			{
+				"id" : "b20",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b19"
+				}
+			},
+			{
+				"id" : "b21",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b20"
+				}
+			},
+			{
+				"id" : "b22",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b21"
+				}
+			},
+			{
+				"id" : "b23",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b22"
+				}
+			},
+			{
+				"id" : "b24",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b23"
+				}
+			},
+			{
+				"id" : "b25",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b24"
+				}
+			},
+			{
+				"id" : "b26",
+				"type" : "purple",
+				"object" : "brick",
+				"position" : {
+					"below" : "b25"
+				}
+			}
+		]
+	}
+}

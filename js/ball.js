@@ -36,8 +36,11 @@ function Ball() {
         if (this.handle) 
             this.stop();
         
-        this.dimensions.top = String(parseInt(this.dimensions.top)-parseInt(platform.dimensions.height))+"px";
-        this.object.setAttribute("style", stringifyToCSS(this.dimensions));
+        this.dimensions.left = (parseInt(platform.dimensions.left)+(parseInt(platform.dimensions.width)/2))-parseInt(this.dimensions.width)/2;
+        this.dimensions.top = bounds.length-(parseInt(platform.dimensions.height)+parseInt(this.dimensions.height))-2;
+        this.left=this.down=false;
+        this.up=this.right=true;
+        this.drawObject();
         this.moving=false;
         this.active=false;
     };
