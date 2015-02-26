@@ -53,7 +53,10 @@ function Event(bounds, platform, ball, collision) {
         });
     };
 
-    this.launchCustomEvent=function() {
+    this.launchCustomEvent=function(objects) {
 
+        window.onclick=function(e) {
+            console.log(e);
+        };
     };
 }
