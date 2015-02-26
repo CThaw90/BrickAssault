@@ -15,10 +15,13 @@
     <script language="javascript" src="js/collision.js" type="text/javascript"></script>
     <script language="javascript" src="js/event.js" type="text/javascript"></script>
     <script language="javascript" src="js/game.js" type="text/javascript"></script>
+    <script language="javascript" src="js/customize.js" type="text/javascript"></script>
 </head>
 <body>
+<!--
     <div id="loading"><input type="file" id="level"/><button type="button" id="load" onclick="loadFile()">Load</button></div>
     <div></div>
+-->
     <div id="boundary" style="display: none;"></div>
     
     <div id="ball" class="game-object" style="display: none;">
@@ -29,8 +32,18 @@
         <img alt="platform" src="img/platform.png" class="sprite-img"/>
     </div>
 
-    <div id="startMessage" onclick="start()">
-        [Push 'Enter' to Start]
+    <div id="startMessage">
+        <div onclick="start()">[Click Here to Start]</div>
+        <div>You can also load in a custom level json file</div><br/>
+        <div id="loading">
+            <input type="file" id="level" />
+            <button type="button" id="load" onclick="loadFile()">Load</button>
+        </div><br/>
+        <div>
+            <button type="button" id="createLevel" onclick="customizedLevel()">
+                Click Here to Create Your Own Custom Level
+            </button>
+        </div>
     </div>
 </body>
 </html>

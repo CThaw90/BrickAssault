@@ -43,6 +43,7 @@ function Ball() {
         this.drawObject();
         this.moving=false;
         this.active=false;
+        
     };
     
     // Specifies the location of an object
@@ -100,8 +101,6 @@ function Ball() {
     // Draws a sprite object to the DOM 
     // based on the dimensions attribute
     this.drawObject=function() {
-//        console.log("Drawing...");
-//        console.log(this.dimensions);
         this.dimensions.height=parseInt(this.dimensions.height)+"px";
         this.dimensions.width=parseInt(this.dimensions.width)+"px";
         this.dimensions.left=parseInt(this.dimensions.left)+"px";

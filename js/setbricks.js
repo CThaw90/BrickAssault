@@ -54,14 +54,15 @@ function loadFile() {
 // Sets and organizes the bricks according to their level
 function loadLevel(level) {
     if (isNaN(level)) return;
+    host=window.location.hostname;
     request=undefined;
+    
     if (window.XMLHttpRequest) {
         request=new XMLHttpRequest();
     }
     switch (level) {
         case 1:
-            //request.open("GET", "http://gamesfolio.com/json/levels/level1.json", false); 
-            request.open("GET", "http://localhost/BrickAssault/levels/level1.json", false);
+            request.open("GET", "http://"+host+"/BrickAssault/json/levels/level1.json", false);
             break;
         default:
             return;
