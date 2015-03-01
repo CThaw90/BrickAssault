@@ -1,6 +1,6 @@
 /*
     Created By Chris 02/08/2015
-    
+
     Function responsible for setting bricks in the
     level appropriate layout
 */
@@ -13,9 +13,9 @@ var bricks={};
 
 // Raw Data of a loaded JSON file
 var content=null, level=null;
-        
+
 function createBrickTypes() {
-    
+
     for (var i=0; i < types.length; i++) {
         var type=types[i];
         brickTypes[type]=document.createElement("img");
@@ -25,13 +25,18 @@ function createBrickTypes() {
     }
 }
 
-function createBrickSprite(id) {
-    var type=id.split("-")[0];
+function createBrickSprite(id, type) {
+    var sprite=document.createElement("img");
+    sprite.setAttribute("alt", "brick");
+    sprite.setAttribute("class", "sprite-img");
+    sprite.setAttribute("src", "img/"+type+".png");
+
     var div=document.createElement("div");
     div.setAttribute("id", id);
     div.setAttribute("class", "game-object brick");
-    div.appendChild(brickTypes[type].cloneNode());
+    div.appendChild(sprite.cloneNode());
     document.body.appendChild(div);
+    return div;
 }
 
 function loadFile() {
@@ -56,7 +61,7 @@ function loadLevel(level) {
     if (isNaN(level)) return;
     host=window.location.hostname;
     request=undefined;
-    
+
     if (window.XMLHttpRequest) {
         request=new XMLHttpRequest();
     }
@@ -72,7 +77,7 @@ function loadLevel(level) {
             content=request.responseText;
         }
     };
-    
+
     request.send();
     loadData();
 }
@@ -121,7 +126,7 @@ function drawLevelStage(layout) {
 
         dimensions.height=parseInt(d.height);
         dimensions.width=parseInt(d.width);
-        dimensions.position=d.position;    
+        dimensions.position=d.position;
 
         var positioning=layout[i].position;
         if (!positioning.left && !positioning.top) {
@@ -129,7 +134,7 @@ function drawLevelStage(layout) {
                 var b=bricks[positioning.rightOf];
                 dimensions.left=parseInt(b.dimensions.left)+parseInt(b.dimensions.width)+2;
                 dimensions.top=parseInt(b.dimensions.top);
-            } 
+            }
             else if (positioning.leftOf && bricks[positioning.leftOf]) {
                 var b=bricks[positioning.leftOf];
                 dimensions.left=parseInt(b.dimensions.left)-parseInt(b.dimensions.width)-2;

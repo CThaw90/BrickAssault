@@ -25,12 +25,14 @@ function createObjects() {
 	for (var key in customObjects) {
 
 		customObjects[key]=new Brick(key);
-		var d=bounds.sizeAndPosition(customObjects[key], true);
+    customObjects[key].setDimensions(bounds.sizeAndPosition(customObjects[key], true));
 		customObjects[key].dimensions.top=bounds.align ? bounds.length + (bounds.length*0.15) : (bounds.length*0.15)*count;
 		customObjects[key].dimensions.left=bounds.align ? bounds.length + (bounds.length*0.15)*count : bounds.length+(bounds.length*0.15);
-		customObjects[key].dimensions={height: parseInt(d.height)};
-		customObjects[key].dimensions.width=parseInt(d.width);
-		
+		customObjects[key].dimensions.height=parseInt(customObjects[key].dimensions.height);
+		customObjects[key].dimensions.width=parseInt(customObjects[key].dimensions.width);
+    customObjects[key].object=createBrickSprite(count, key);
+    customObjects[key].drawObject();
+
 		count+=1;
 	}
 }
