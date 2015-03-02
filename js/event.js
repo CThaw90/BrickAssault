@@ -54,9 +54,41 @@ function Event(bounds, platform, ball, collision) {
     };
 
     this.launchCustomEvent=function(objects) {
-
-        window.onclick=function(e) {
+        window.document.addEventListener('webkitpointerlockchange', function() {
+            if (objects.selected && !document.pointerLockElement) {
+                objects.selected.object.parentNode.removeChild(objects.selected.object);
+            }
+        });
+        window.document.onmousedown=function(e) {
             console.log(e);
         };
+        for (var key in objects) {
+            objects[key].object.onclick=function(e) {
+                //console.log(e.target.parentNode.id);
+                var typeId= e.target.dataset.typeid;
+                objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                objects.selected.dimensions=bounds.sizeAndPosition(objects.selected, true);
+                objects.selected.dimensions.left=e.x;
+                objects.selected.dimensions.top= e.y;
+                objects.selected.drawObject();
+                if (!document.pointerLockElement) {
+                    bounds.object.requestPointerLock();
+                }
+                window.document.onmousemove=function(e) {
+                    objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+ e.webkitMovementX;
+                    objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+ e.webkitMovementY;
+                    objects.selected.drawObject();
+                };
+            };
+        }
+    };
+
+    this.killCustomEvents=function(objects) {
+        window.document.onmousemove=
+        window.document.onmousedown=null;
+        for (var key in objects) {
+            objects[key].object.onclick=null;
+        }
     };
 }

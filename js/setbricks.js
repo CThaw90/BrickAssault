@@ -25,17 +25,18 @@ function createBrickTypes() {
     }
 }
 
-function createBrickSprite(id, type) {
+function createBrickSprite(id, type, hide) {
     var sprite=document.createElement("img");
     sprite.setAttribute("alt", "brick");
     sprite.setAttribute("class", "sprite-img");
     sprite.setAttribute("src", "img/"+type+".png");
+    sprite.setAttribute("data-typeId", type);
 
     var div=document.createElement("div");
     div.setAttribute("id", id);
     div.setAttribute("class", "game-object brick");
     div.appendChild(sprite.cloneNode());
-    document.body.appendChild(div);
+    if (!hide) document.body.appendChild(div);
     return div;
 }
 
