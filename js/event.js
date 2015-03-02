@@ -54,13 +54,25 @@ function Event(bounds, platform, ball, collision) {
     };
 
     this.launchCustomEvent=function(objects) {
-        window.document.addEventListener('webkitpointerlockchange', function() {
-            if (objects.selected && !document.pointerLockElement) {
-                objects.selected.object.parentNode.removeChild(objects.selected.object);
-            }
-        });
+        window.document.addEventListener('pointerlockchange', deselect);
+        window.document.addEventListener('webkitpointerlockchange', deselect);
+        window.document.addEventListener('mozpointerlockchange', deselect);
         window.document.onmousedown=function(e) {
-            console.log(e);
+            if (objects.selected) {
+                var collisionStatus=detector.collision.detect(objects.selected.dimensions);
+                var left=objects.selected.dimensions.left,
+                    top=objects.selected.dimensions.top;
+                objects.selected.remove();
+                console.log(e);
+                var typeId=collisionStatus.object.id;
+                objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
+                objects.selected.dimensions.left=left;
+                objects.selected.dimensions.top=top;
+                objects.selected.drawObject();
+                //console.log(collisionStatus);
+            }
         };
         for (var key in objects) {
             objects[key].object.onclick=function(e) {
@@ -76,11 +88,20 @@ function Event(bounds, platform, ball, collision) {
                     bounds.object.requestPointerLock();
                 }
                 window.document.onmousemove=function(e) {
-                    objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+ e.webkitMovementX;
-                    objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+ e.webkitMovementY;
-                    objects.selected.drawObject();
+                    if (objects.selected) {
+                        objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+ e.webkitMovementX;
+                        objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+ e.webkitMovementY;
+                        objects.selected.drawObject();
+                    }
                 };
             };
+        }
+
+        function deselect() {
+            if (objects.selected && !document.pointerLockElement) {
+                objects.selected.remove();
+                objects.selected=undefined;
+            }
         }
     };
 

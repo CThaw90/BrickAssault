@@ -1,7 +1,6 @@
 /**
  * Created by Chris on 1/15/2015.
  */
- 
 /* Turns DOM CSS String into a Javascript Object */
 function objectifyCSS(cssText) {
     if (typeof cssText !== String("string")) {

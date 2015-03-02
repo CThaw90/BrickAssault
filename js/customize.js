@@ -1,13 +1,14 @@
 var ball,
     bounds,
     platform,
-    collision,
+    detector={},
     customObjects,
     event;
 
 function customizedLevel() {
 	var s=document.getElementById("startMessage");
     s.parentNode.removeChild(s);
+    detector.collision=new Collision();
     bounds=new Bound();
     event = new Event(bounds, undefined, undefined, undefined);
 
@@ -32,8 +33,8 @@ function createObjects() {
 		customObjects[key].dimensions.height=parseInt(customObjects[key].dimensions.height);
 		customObjects[key].dimensions.width=parseInt(customObjects[key].dimensions.width);
         customObjects[key].object=createBrickSprite(count, key);
+        detector.collision.registerObject(customObjects[key]);
         customObjects[key].drawObject();
-
 		count+=1;
 	}
 }
