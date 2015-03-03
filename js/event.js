@@ -60,18 +60,40 @@ function Event(bounds, platform, ball, collision) {
         window.document.onmousedown=function(e) {
             if (objects.selected) {
                 var collisionStatus=detector.collision.detect(objects.selected.dimensions);
-                var left=objects.selected.dimensions.left,
-                    top=objects.selected.dimensions.top;
-                objects.selected.remove();
-                console.log(e);
-                var typeId=collisionStatus.object.id;
-                objects.selected=new Brick(Object.keys(bricks).length+typeId);
-                objects.selected.object=createBrickSprite(objects.selected.id, typeId);
-                objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
-                objects.selected.dimensions.left=left;
-                objects.selected.dimensions.top=top;
-                objects.selected.drawObject();
-                //console.log(collisionStatus);
+                if (collisionStatus) {
+                    var left=objects.selected.dimensions.left,
+                        top=objects.selected.dimensions.top;
+                    objects.selected.remove();
+                    console.log(e);
+                    var typeId=collisionStatus.object.id;
+                    objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                    objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                    objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
+                    objects.selected.dimensions.left=left;
+                    objects.selected.dimensions.top=top;
+                    objects.selected.drawObject();
+                } else if (parseInt(objects.selected.dimensions.left) > bounds.wall.left
+                        && parseInt(objects.selected.dimensions.left)+parseInt(objects.selected.dimensions.width) < bounds.wall.right
+                        && parseInt(objects.selected.dimensions.top) > bounds.wall.top
+                        && parseInt(objects.selected.dimensions.top)+parseInt(objects.selected.dimensions.height) < bounds.wall.bottom){
+                    var brick=objects.selected.object.cloneNode(true);
+                    var left=objects.selected.dimensions.left,
+                        top=objects.selected.dimensions.top;
+                    bricks[brick.id]=new Brick(brick.id);
+                    detector.collision.registerObject(bricks[brick.id]);
+                    bricks[brick.id].object=brick;
+                    bricks[brick.id].setDimensions(objects.selected.dimensions);
+                    document.body.appendChild(brick);
+                    bricks[brick.id].drawObject();
+
+                    var typeId=brick.id.replace(parseInt(brick.id), "");
+                    objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                    objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                    objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
+                    objects.selected.dimensions.left=left;
+                    objects.selected.dimensions.top=top;
+                    objects.selected.drawObject();
+                }
             }
         };
         for (var key in objects) {
