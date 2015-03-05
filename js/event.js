@@ -76,7 +76,8 @@ function Event(bounds, platform, ball, collision) {
                         && parseInt(objects.selected.dimensions.left)+parseInt(objects.selected.dimensions.width) < bounds.wall.right
                         && parseInt(objects.selected.dimensions.top) > bounds.wall.top
                         && parseInt(objects.selected.dimensions.top)+parseInt(objects.selected.dimensions.height) < bounds.wall.bottom){
-                    var brick=objects.selected.object.cloneNode(true);
+                    //var brick=objects.selected.object.cloneNode(true);
+                    var brick=objects.selected.object;
                     var left=objects.selected.dimensions.left,
                         top=objects.selected.dimensions.top;
                     bricks[brick.id]=new Brick(brick.id);
@@ -94,6 +95,10 @@ function Event(bounds, platform, ball, collision) {
                     objects.selected.dimensions.top=top;
                     objects.selected.drawObject();
                 }
+            } else if (e.target.id!=="boundary" && e.x < bounds.wall.right && e.x > bounds.wall.left 
+                        && e.y > bounds.wall.top && e.y < bounds.wall.bottom) {
+                // console.log(e.target.id||e.target.parentNode.id);
+                removeBrick(e.target.id||e.target.parentNode.id);
             }
         };
         for (var key in objects) {

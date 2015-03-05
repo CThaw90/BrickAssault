@@ -23,6 +23,7 @@ function Brick(id) {
     };
 
     this.remove=function() {
+        // return document.body.removeChild(this.object);
         return this.object && this.object.parentNode ? this.object.parentNode.removeChild(this.object) : false;
     };
 }

@@ -14,6 +14,14 @@ var bricks={};
 // Raw Data of a loaded JSON file
 var content=null, level=null;
 
+function setBrick(brick) {
+    bricks[brick.id]=brick;
+}
+
+function removeBrick(id) {
+    bricks[id].remove();
+    delete bricks[id];
+}
 function createBrickTypes() {
 
     for (var i=0; i < types.length; i++) {
