@@ -60,7 +60,7 @@ function Event(bounds, platform, ball, collision) {
         window.document.onmousedown=function(e) {
             if (objects.selected) {
                 var collisionStatus=detector.collision.detect(objects.selected.dimensions);
-                if (collisionStatus) {
+                if (collisionStatus && (collisionStatus.x > parseInt(bounds.wall.right) || collisionStatus.y > parseInt(bounds.wall.bottom))) {
                     var left=objects.selected.dimensions.left,
                         top=objects.selected.dimensions.top;
                     objects.selected.remove();
@@ -72,7 +72,7 @@ function Event(bounds, platform, ball, collision) {
                     objects.selected.dimensions.left=left;
                     objects.selected.dimensions.top=top;
                     objects.selected.drawObject();
-                } else if (parseInt(objects.selected.dimensions.left) > bounds.wall.left
+                } else if (!collisionStatus && parseInt(objects.selected.dimensions.left) > bounds.wall.left
                         && parseInt(objects.selected.dimensions.left)+parseInt(objects.selected.dimensions.width) < bounds.wall.right
                         && parseInt(objects.selected.dimensions.top) > bounds.wall.top
                         && parseInt(objects.selected.dimensions.top)+parseInt(objects.selected.dimensions.height) < bounds.wall.bottom){
