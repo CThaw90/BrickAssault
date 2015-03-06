@@ -113,6 +113,38 @@ function Event(bounds, platform, ball, collision) {
                 objects.selected.drawObject();
                 if (!document.pointerLockElement) {
                     bounds.object.requestPointerLock();
+                    window.document.onkeydown=function(e) {
+                        var LEFT=37, UP=38, RIGHT=39, DOWN=40;
+                        switch (e.keyCode) {
+                            case LEFT:
+                                objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)-
+                                parseInt(objects.selected.dimensions.width)-2;
+                                objects.selected.drawObject();
+                                break;
+
+                            case UP:
+                                objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)-
+                                parseInt(objects.selected.dimensions.height)-2;
+                                objects.selected.drawObject();
+                                break;
+
+                            case RIGHT:
+                                objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+
+                                parseInt(objects.selected.dimensions.width)+2;
+                                objects.selected.drawObject();
+                                break;
+
+                            case DOWN:
+                                objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+
+                                parseInt(objects.selected.dimensions.height)+2;
+                                objects.selected.drawObject();
+                                break;
+
+                            default:
+                                break;
+                        }
+                        // console.log(e.keyCode);
+                    };
                 }
                 window.document.onmousemove=function(e) {
                     if (objects.selected) {
@@ -126,6 +158,7 @@ function Event(bounds, platform, ball, collision) {
 
         function deselect() {
             if (objects.selected && !document.pointerLockElement) {
+                window.document.onkeydown=null;
                 objects.selected.remove();
                 objects.selected=undefined;
             }
