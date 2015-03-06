@@ -3,7 +3,6 @@
  */
 function Event(bounds, platform, ball, collision) {
     this.launch=function() {
-        
         window.document.body.onkeydown=
         window.document.body.onkeypress=function(e) {
             var ENTER_KEY=13, SPACE_BAR=32, ESC_KEY=27;
@@ -57,49 +56,12 @@ function Event(bounds, platform, ball, collision) {
         window.document.addEventListener('pointerlockchange', deselect);
         window.document.addEventListener('webkitpointerlockchange', deselect);
         window.document.addEventListener('mozpointerlockchange', deselect);
+        window.document.onkeypress=window.document.onkeyup=function(e) {
+            if (e.keyCode===115) 
+            console.log(e);
+        };
         window.document.onmousedown=function(e) {
-            if (objects.selected) {
-                var collisionStatus=detector.collision.detect(objects.selected.dimensions);
-                if (collisionStatus && (collisionStatus.x > parseInt(bounds.wall.right) || collisionStatus.y > parseInt(bounds.wall.bottom))) {
-                    var left=objects.selected.dimensions.left,
-                        top=objects.selected.dimensions.top;
-                    objects.selected.remove();
-                    console.log(e);
-                    var typeId=collisionStatus.object.id;
-                    objects.selected=new Brick(Object.keys(bricks).length+typeId);
-                    objects.selected.object=createBrickSprite(objects.selected.id, typeId);
-                    objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
-                    objects.selected.dimensions.left=left;
-                    objects.selected.dimensions.top=top;
-                    objects.selected.drawObject();
-                } else if (!collisionStatus && parseInt(objects.selected.dimensions.left) > bounds.wall.left
-                        && parseInt(objects.selected.dimensions.left)+parseInt(objects.selected.dimensions.width) < bounds.wall.right
-                        && parseInt(objects.selected.dimensions.top) > bounds.wall.top
-                        && parseInt(objects.selected.dimensions.top)+parseInt(objects.selected.dimensions.height) < bounds.wall.bottom){
-                    //var brick=objects.selected.object.cloneNode(true);
-                    var brick=objects.selected.object;
-                    var left=objects.selected.dimensions.left,
-                        top=objects.selected.dimensions.top;
-                    bricks[brick.id]=new Brick(brick.id);
-                    detector.collision.registerObject(bricks[brick.id]);
-                    bricks[brick.id].object=brick;
-                    bricks[brick.id].setDimensions(objects.selected.dimensions);
-                    document.body.appendChild(brick);
-                    bricks[brick.id].drawObject();
-
-                    var typeId=brick.id.replace(parseInt(brick.id), "");
-                    objects.selected=new Brick(Object.keys(bricks).length+typeId);
-                    objects.selected.object=createBrickSprite(objects.selected.id, typeId);
-                    objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
-                    objects.selected.dimensions.left=left;
-                    objects.selected.dimensions.top=top;
-                    objects.selected.drawObject();
-                }
-            } else if (e.target.id!=="boundary" && e.x < bounds.wall.right && e.x > bounds.wall.left 
-                        && e.y > bounds.wall.top && e.y < bounds.wall.bottom) {
-                // console.log(e.target.id||e.target.parentNode.id);
-                removeBrick(e.target.id||e.target.parentNode.id);
-            }
+            interactivity(objects, e);
         };
         for (var key in objects) {
             objects[key].object.onclick=function(e) {
@@ -114,7 +76,7 @@ function Event(bounds, platform, ball, collision) {
                 if (!document.pointerLockElement) {
                     bounds.object.requestPointerLock();
                     window.document.onkeydown=function(e) {
-                        var LEFT=37, UP=38, RIGHT=39, DOWN=40;
+                        var SPACE_BAR=32, LEFT=37, UP=38, RIGHT=39, DOWN=40;
                         switch (e.keyCode) {
                             case LEFT:
                                 objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)-
@@ -140,7 +102,10 @@ function Event(bounds, platform, ball, collision) {
                                 objects.selected.drawObject();
                                 break;
 
+                            case SPACE_BAR:
+                                interactivity(objects, e);
                             default:
+                                console.log(e.keyCode);
                                 break;
                         }
                         // console.log(e.keyCode);
@@ -164,6 +129,50 @@ function Event(bounds, platform, ball, collision) {
             }
         }
     };
+
+    function interactivity(objects, e) {
+        if (objects.selected) {
+            var collisionStatus=detector.collision.detect(objects.selected.dimensions);
+            if (collisionStatus && (collisionStatus.x > parseInt(bounds.wall.right) || collisionStatus.y > parseInt(bounds.wall.bottom))) {
+                var left=objects.selected.dimensions.left,
+                    top=objects.selected.dimensions.top;
+                objects.selected.remove();
+                var typeId=collisionStatus.object.id;
+                objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
+                objects.selected.dimensions.left=left;
+                objects.selected.dimensions.top=top;
+                objects.selected.drawObject();
+            } else if (!collisionStatus && parseInt(objects.selected.dimensions.left) > bounds.wall.left
+                    && parseInt(objects.selected.dimensions.left)+parseInt(objects.selected.dimensions.width) < bounds.wall.right
+                    && parseInt(objects.selected.dimensions.top) > bounds.wall.top
+                    && parseInt(objects.selected.dimensions.top)+parseInt(objects.selected.dimensions.height) < bounds.wall.bottom){
+                //var brick=objects.selected.object.cloneNode(true);
+                var brick=objects.selected.object;
+                var left=objects.selected.dimensions.left,
+                    top=objects.selected.dimensions.top;
+                bricks[brick.id]=new Brick(brick.id);
+                detector.collision.registerObject(bricks[brick.id]);
+                bricks[brick.id].object=brick;
+                bricks[brick.id].setDimensions(objects.selected.dimensions);
+                document.body.appendChild(brick);
+                bricks[brick.id].drawObject();
+
+                var typeId=brick.id.replace(parseInt(brick.id), "");
+                objects.selected=new Brick(Object.keys(bricks).length+typeId);
+                objects.selected.object=createBrickSprite(objects.selected.id, typeId);
+                objects.selected.setDimensions(bounds.sizeAndPosition(objects.selected, true));
+                objects.selected.dimensions.left=left;
+                objects.selected.dimensions.top=top;
+                objects.selected.drawObject();
+            }
+        } else if (e.target.id!=="boundary" && e.x < bounds.wall.right && e.x > bounds.wall.left 
+                    && e.y > bounds.wall.top && e.y < bounds.wall.bottom) {
+            // console.log(e.target.id||e.target.parentNode.id);
+            removeBrick(e.target.id||e.target.parentNode.id);
+        }
+    }
 
     this.killCustomEvents=function(objects) {
         window.document.onmousemove=
