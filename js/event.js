@@ -56,16 +56,11 @@ function Event(bounds, platform, ball, collision) {
         window.document.addEventListener('pointerlockchange', deselect);
         window.document.addEventListener('webkitpointerlockchange', deselect);
         window.document.addEventListener('mozpointerlockchange', deselect);
-        window.document.onkeypress=window.document.onkeyup=function(e) {
-            if (e.keyCode===115) 
-            console.log(e);
-        };
         window.document.onmousedown=function(e) {
             interactivity(objects, e);
         };
         for (var key in objects) {
             objects[key].object.onclick=function(e) {
-                //console.log(e.target.parentNode.id);
                 var typeId= e.target.dataset.typeid;
                 objects.selected=new Brick(Object.keys(bricks).length+typeId);
                 objects.selected.object=createBrickSprite(objects.selected.id, typeId);
@@ -76,39 +71,58 @@ function Event(bounds, platform, ball, collision) {
                 if (!document.pointerLockElement) {
                     bounds.object.requestPointerLock();
                     window.document.onkeydown=function(e) {
-                        var SPACE_BAR=32, LEFT=37, UP=38, RIGHT=39, DOWN=40;
+                        var ENTER=13, SPACE_BAR=32, LEFT=37, UP=38, RIGHT=39, DOWN=40;
                         switch (e.keyCode) {
                             case LEFT:
-                                objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)-
-                                parseInt(objects.selected.dimensions.width)-2;
-                                objects.selected.drawObject();
+                                if (objects.selected) {
+                                    objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)-
+                                    parseInt(objects.selected.dimensions.width)-2;
+                                    objects.selected.drawObject();
+                                }
                                 break;
 
                             case UP:
-                                objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)-
-                                parseInt(objects.selected.dimensions.height)-2;
-                                objects.selected.drawObject();
+                                if (objects.selected) {
+                                    objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)-
+                                    parseInt(objects.selected.dimensions.height)-2;
+                                    objects.selected.drawObject();
+                                }
                                 break;
 
                             case RIGHT:
-                                objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+
-                                parseInt(objects.selected.dimensions.width)+2;
-                                objects.selected.drawObject();
+                                if (objects.selected) {
+                                    objects.selected.dimensions.left=parseInt(objects.selected.dimensions.left)+
+                                    parseInt(objects.selected.dimensions.width)+2;
+                                    objects.selected.drawObject();
+                                }
                                 break;
 
                             case DOWN:
-                                objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+
-                                parseInt(objects.selected.dimensions.height)+2;
-                                objects.selected.drawObject();
+                                if (objects.selected) {
+                                    objects.selected.dimensions.top=parseInt(objects.selected.dimensions.top)+
+                                    parseInt(objects.selected.dimensions.height)+2;
+                                    objects.selected.drawObject();    
+                                }
                                 break;
 
                             case SPACE_BAR:
-                                interactivity(objects, e);
+                                if (objects.selected) {
+                                    interactivity(objects, e);
+                                }
+                                break;
+                            case ENTER:
+                                for (var key in objects) {
+                                    if (objects[key]) {
+                                        objects[key].remove();
+                                        delete objects[key];                                        
+                                    }
+                                }
+                                killCustomEvents();
+                                start(bricks);
+                                break;
                             default:
-                                console.log(e.keyCode);
                                 break;
                         }
-                        // console.log(e.keyCode);
                     };
                 }
                 window.document.onmousemove=function(e) {
@@ -123,7 +137,7 @@ function Event(bounds, platform, ball, collision) {
 
         function deselect() {
             if (objects.selected && !document.pointerLockElement) {
-                window.document.onkeydown=null;
+                // window.document.onkeydown=null;
                 objects.selected.remove();
                 objects.selected=undefined;
             }
@@ -167,18 +181,15 @@ function Event(bounds, platform, ball, collision) {
                 objects.selected.dimensions.top=top;
                 objects.selected.drawObject();
             }
-        } else if (e.target.id!=="boundary" && e.x < bounds.wall.right && e.x > bounds.wall.left 
+        } else if (e.target.parentNode.id && e.target.id!=="boundary" && e.x < bounds.wall.right && e.x > bounds.wall.left 
                     && e.y > bounds.wall.top && e.y < bounds.wall.bottom) {
             // console.log(e.target.id||e.target.parentNode.id);
             removeBrick(e.target.id||e.target.parentNode.id);
         }
     }
 
-    this.killCustomEvents=function(objects) {
+    function killCustomEvents(objects) {
         window.document.onmousemove=
         window.document.onmousedown=null;
-        for (var key in objects) {
-            objects[key].object.onclick=null;
-        }
     };
 }

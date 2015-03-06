@@ -76,7 +76,11 @@ function loadLevel(level) {
     }
     switch (level) {
         case 1:
-            request.open("GET", "http://"+host+"/BrickAssault/json/levels/level1.json", false);
+            if (host) {
+                host = host==="localhost" ? host+"/BrickAssault" : host;
+                request.open("GET", "http://"+host+"/json/levels/level1.json", false);
+            }
+            else return;
             break;
         default:
             return;

@@ -7,24 +7,30 @@ var ball,
     collision,
     event;
 
-function start() {
+function start(bricks) {
     var s=document.getElementById("startMessage");
-    s.parentNode.removeChild(s);
+    if (s) s.parentNode.removeChild(s);
     ball=new Ball();
     bounds = new Bound();
     platform=new Platform();
-    collision = new Collision();
+    collision=new Collision();
     event = new Event(bounds, platform, ball, collision);
     
     collision.registerObject(platform);
     collision.registerObject(ball);
     collision.registerObject(bounds);
+    if (bricks) {
+        for (var key in bricks) {
+            collision.registerObject(bricks[key]);
+        }
+        
+    }
     platform.setDimensions(bounds.sizeAndPosition(platform, true));
     ball.setDimensions(bounds.sizeAndPosition(ball, true));
     ball.initPosition(platform);
-    if (content) { 
+    if (content && !bricks) { 
         loadData(); 
-    } else { 
+    } else if (!bricks) { 
         loadLevel(1);
     }
     event.launch();
