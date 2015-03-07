@@ -5,7 +5,11 @@
     level appropriate layout
 */
 // A static list of all the available brick types
-var types=["rb", "gb", "yb", "bb", "pb"];
+//var types=[
+//    {rb:"red", id:"rb" }, {gb:"green", id:"gb"}, {yb:"yellow", id:"yb"},
+//    {"bb":"blue", id:"bb"}, {pb:"purple", id:"pb"}
+//];
+var types={rb: "red", gb: "green", yb: "yellow", bb:"blue", pb:"purple"};
 var brickTypes={};
 
 // An object that keeps track of all bricks by their ids
@@ -23,14 +27,19 @@ function removeBrick(id) {
     delete bricks[id];
 }
 function createBrickTypes() {
-
-    for (var i=0; i < types.length; i++) {
-        var type=types[i];
-        brickTypes[type]=document.createElement("img");
-        brickTypes[type].setAttribute("alt", "brick");
-        brickTypes[type].setAttribute("class", "sprite-img");
-        brickTypes[type].setAttribute("src", "img/"+type+".png");
+    for (var id in types) {
+        brickTypes[id]=document.createElement("img");
+        brickTypes[id].setAttribute("alt", "brick");
+        brickTypes[id].setAttribute("class", "sprite-img");
+        brickTypes[id].setAttribute("src", "img/"+id+".png");
     }
+    //for (var i=0; i < types.length; i++) {
+    //    var type=types[i].id;
+    //    brickTypes[type]=document.createElement("img");
+    //    brickTypes[type].setAttribute("alt", "brick");
+    //    brickTypes[type].setAttribute("class", "sprite-img");
+    //    brickTypes[type].setAttribute("src", "img/"+type+".png");
+    //}
 }
 
 function createBrickSprite(id, type, hide) {
@@ -55,7 +64,7 @@ function loadFile() {
         var r=new FileReader();
         r.onload=function(e) {
             content=e.target.result;
-        }
+        };
         r.readAsText(input.files[0]);
         document.getElementById("loading").innerHTML="File Loaded";
     }
@@ -78,7 +87,7 @@ function loadLevel(level) {
         case 1:
             if (host) {
                 host = host==="localhost" ? host+"/BrickAssault" : host;
-                request.open("GET", "http://"+host+"/json/levels/level1.json", false);
+                request.open("GET", "http://"+host+"/json/levels/level1.json", true);
             }
             else return;
             break;
@@ -88,12 +97,42 @@ function loadLevel(level) {
     request.onreadystatechange=function() {
         if (request.readyState===4 && request.status===200) {
             content=request.responseText;
+            loadData();
         }
     };
 
     request.send();
-    loadData();
 }
+
+function configCustomLevel(name, bricks, config) {
+    var level={'name': name};
+    level.level={};
+    level.level['config'] =
+        config ? config :
+        {
+            types: {
+                    yellow: 'img/yb.png',
+                    red: 'img/rb.png',
+                    blue: 'img/bb.png',
+                    purple: 'img/pb.png',
+                    green: 'img/gb.png'
+            }
+        };
+    level.level.layout=[];
+    for (var id in bricks) {
+        var brick={};
+        brick['id']=id;
+        brick['type']=id.replace(String(parseInt(id)), "");
+        brick['type']=types[brick['type']];
+        brick['object']="brick";
+        brick.position={};
+        brick.position.left=parseInt(bricks[id].dimensions.left)/(parseInt(bounds.dimensions.left)+bounds.length);
+        brick.position.top=parseInt(bricks[id].dimensions.top)/(parseInt(bounds.dimensions.top)+bounds.length);
+        level.level.layout.push(brick);
+    }
+    return level;
+}
+
 function loadData() {
     // try {
         level=JSON.parse(content);
@@ -106,7 +145,7 @@ function loadData() {
 
 function loadBrickTypes(config) {
     if (config.types) {
-        var types=config.types
+        var types=config.types;
         for (var key in types) {
             brickTypes[key]=document.createElement("img");
             brickTypes[key].setAttribute("alt", "brick");
@@ -126,7 +165,9 @@ function drawLevelStage(layout) {
         }
 
         var div=document.createElement("div");
+        //layout[i].type=types[layout[i].type];
         layoutCache[layout[i].id]=layout[i];
+        //layoutCache[layout[i].id].type=types[layout[i].type];
         div.setAttribute("id", layout[i].id);
         div.setAttribute("class", "game-object brick");
         div.appendChild(brickTypes[layout[i].type].cloneNode());

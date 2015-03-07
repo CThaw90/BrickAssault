@@ -44,10 +44,10 @@ function Bound() {
         this.align=window.innerHeight > window.innerWidth;
         this.length=Math.min(window.innerHeight, window.innerWidth)-(this.offset*3);
         
-        this.wall.left=this.align ? 0+this.offset : (window.innerWidth/2)-(this.length/2);
+        this.wall.left=this.align ? this.offset : (window.innerWidth/2)-(this.length/2);
         this.wall.right=this.wall.left+this.length;
         
-        this.wall.top=this.align ? (window.innerHeight/2)-(this.length/2) : 0 + this.offset;
+        this.wall.top=this.align ? (window.innerHeight/2)-(this.length/2) : this.offset;
         this.wall.bottom=this.wall.top+this.length;
         
         this.dimensions.height=this.length+"px";
