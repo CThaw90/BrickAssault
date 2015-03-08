@@ -33,13 +33,6 @@ function createBrickTypes() {
         brickTypes[id].setAttribute("class", "sprite-img");
         brickTypes[id].setAttribute("src", "img/"+id+".png");
     }
-    //for (var i=0; i < types.length; i++) {
-    //    var type=types[i].id;
-    //    brickTypes[type]=document.createElement("img");
-    //    brickTypes[type].setAttribute("alt", "brick");
-    //    brickTypes[type].setAttribute("class", "sprite-img");
-    //    brickTypes[type].setAttribute("src", "img/"+type+".png");
-    //}
 }
 
 function createBrickSprite(id, type, hide) {
@@ -126,8 +119,8 @@ function configCustomLevel(name, bricks, config) {
         brick['type']=types[brick['type']];
         brick['object']="brick";
         brick.position={};
-        brick.position.left=parseInt(bricks[id].dimensions.left)/(parseInt(bounds.dimensions.left)+bounds.length);
-        brick.position.top=parseInt(bricks[id].dimensions.top)/(parseInt(bounds.dimensions.top)+bounds.length);
+        brick.position.left=(parseInt(bricks[id].dimensions.left)-bounds.wall.left)/bounds.length;
+        brick.position.top=(parseInt(bricks[id].dimensions.top)-bounds.wall.top)/bounds.length;
         level.level.layout.push(brick);
     }
     return level;
