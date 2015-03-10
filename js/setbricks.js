@@ -123,7 +123,30 @@ function configCustomLevel(name, bricks, config) {
         brick.position.top=(parseInt(bricks[id].dimensions.top)-bounds.wall.top)/bounds.length;
         level.level.layout.push(brick);
     }
+    
+    sendLevelData(JSON.stringify(level));
     return level;
+}
+
+function sendLevelData(data) {
+    var host=window.location.hostname, request=null;
+    if (window.XMLHttpRequest) {
+        request=new XMLHttpRequest();
+    }
+    
+    if (request && host) {
+        host = host==="localhost" ? host+"/BrickAssault" : host;
+        console.log(host);
+        request.open("POST", "http://"+host+"/php/controllers/LevelController.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.onreadystatechange=function() {
+            if (request.readyState===4 && request.status===200) {
+                console.log(request.responseText);
+            }
+        };
+        
+        request.send("level="+data);
+    }
 }
 
 function loadData() {
