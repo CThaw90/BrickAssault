@@ -111,14 +111,18 @@ function Event(bounds, platform, ball, collision) {
                                 }
                                 break;
                             case ENTER:
-                                for (var key in objects) {
-                                    if (objects[key]) {
-                                        objects[key].remove();
-                                        delete objects[key];                                        
+                                var name=prompt("Name your Custom level");
+                                if (name) {
+                                    for (var key in objects) {
+                                        if (objects[key]) {
+                                            objects[key].remove();
+                                            delete objects[key];                                        
+                                        }
                                     }
+                                    configCustomLevel(name, bricks);
+                                    killCustomEvents();
+                                    start(bricks);
                                 }
-                                killCustomEvents();
-                                start(bricks);
                                 break;
                             default:
                                 break;
@@ -190,6 +194,8 @@ function Event(bounds, platform, ball, collision) {
 
     function killCustomEvents(objects) {
         window.document.onmousemove=
-        window.document.onmousedown=null;
+        window.document.onmousedown=
+        window.document.onkeydown=
+        window.onkeypress=null;
     };
 }
